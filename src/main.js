@@ -1,4 +1,5 @@
-import { GameLoop, init, Sprite } from 'kontra'
+/* global Image */
+import { GameLoop, init, Sprite, TileEngine } from 'kontra'
 
 /*
 640x480 screen
@@ -6,13 +7,19 @@ import { GameLoop, init, Sprite } from 'kontra'
 20x15 tiles
 */
 
-const W = 640
-const H = 480
+const SCREEN_WIDTH = 640
+const SCREEN_HEIGHT = 480
+
+const TILE_WIDTH = 32
+const TILE_HEIGHT = 32
+
+const MAP_WIDTH = 20
+const MAP_HEIGHT = 15
 
 const { canvas, context } = init()
 
-canvas.width = W
-canvas.height = H
+canvas.width = SCREEN_WIDTH
+canvas.height = SCREEN_HEIGHT
 
 const palette = [
   '#000', // 0
@@ -55,11 +62,10 @@ const c = {
   'bright-white': 15
 }
 
-// ...
-
 const sprite = Sprite({
-  height: 32,
-  width: 32,
+  width: TILE_WIDTH,
+  height: TILE_HEIGHT,
+
   x: 0,
   y: 0,
 
@@ -67,25 +73,99 @@ const sprite = Sprite({
     for (let y = 0; y < 2; ++y) {
       for (let x = 0; x < 8; ++x) {
         context.fillStyle = palette[y * 8 + x]
-        context.fillRect(this.x + x * this.width, this.y + y * this.height, this.width, this.height)
+        context.fillRect(this.x + x * this.width, this.y + y * this.height,
+          this.width, this.height)
       }
     }
   }
 })
 
-const loop = GameLoop({
-  render () {
-    context.fillStyle = palette[c['black']]
-    context.fillRect(0, 0, context.canvas.width, context.canvas.height)
+let tileEngine
 
-    sprite.render()
+(() => {
+  const canvas2 = document.createElement('canvas')
 
-    // ...
-  },
+  canvas2.width = TILE_WIDTH * 4
+  canvas2.height = TILE_HEIGHT * 4
 
-  update () {
-    // ...
+  const context2 = canvas2.getContext('2d')
+
+  context2.fillStyle = palette[c['black']]
+  context2.fillRect(0, 0, canvas2.width, canvas2.height)
+
+  for (let y = 0; y < 4; ++y) {
+    for (let x = 0; x < 4; ++x) {
+      context2.fillStyle = palette[y * 4 + x]
+      context2.fillRect(x * TILE_WIDTH, y * TILE_HEIGHT, TILE_WIDTH, TILE_HEIGHT)
+    }
   }
-})
 
-loop.start()
+  const image = new Image()
+
+  image.onload = function () {
+    tileEngine = TileEngine({
+      tileheight: TILE_HEIGHT,
+      tilewidth: TILE_WIDTH,
+
+      width: MAP_WIDTH + 1,
+      height: MAP_HEIGHT,
+
+      tilesets: [{
+        firstgid: 1,
+        image
+      }],
+
+      layers: [{
+        name: 'ground',
+        data: [
+          /* eslint-disable indent, no-multi-spaces */
+           2,  2,  2,  2,  2,  2, 11, 11, 11, 11, 11, 11,  2,  2, 15, 15,  2,  2,  2,  2,  2,
+           2, 11, 11, 11, 11,  2, 11, 11, 11, 11, 11, 11, 11,  2, 11, 15, 11,  2,  2,  2,  2,
+          11, 11, 11, 11, 15, 15, 15,  2,  2,  2,  2,  2,  2,  2,  2, 11,  2,  2,  2,  2,  2,
+          15,  2,  2, 11, 11, 15, 11, 11,  2,  2,  2, 11,  2,  2,  2,  2,  2,  2,  2,  2,  2,
+           2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,
+           2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,
+           2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,
+           2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,
+           2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,
+           2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,
+           2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,
+           2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2, 11, 15,  2,  2,  2,  2,  2,  2,
+           2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,
+           2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,
+           2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2
+          /* eslint-enable indent, no-multi-spaces */
+        ]
+      }]
+    })
+
+    main()
+  }
+
+  image.src = canvas2.toDataURL()
+})()
+
+function main () {
+  let dx = 0.1
+
+  const loop = GameLoop({
+    render () {
+      context.fillStyle = palette[c['black']]
+      context.fillRect(0, 0, context.canvas.width, context.canvas.height)
+
+      tileEngine.render()
+
+      sprite.render()
+    },
+
+    update () {
+      tileEngine.sx += dx
+
+      if (tileEngine.sx <= 0 || tileEngine.sx >= TILE_WIDTH) {
+        dx *= -1
+      }
+    }
+  })
+
+  loop.start()
+}

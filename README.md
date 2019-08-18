@@ -10,3 +10,4 @@ Screenshots
 -----------
 
 ![VGA 640x480, 16-color palette](screenshots/000.png "VGA 640x480, 16-color palette")
+![Tile engine with palette overlay](screenshots/001.png "Tile engine with palette overlay")
