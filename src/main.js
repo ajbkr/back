@@ -1,5 +1,12 @@
 /* global Image */
-import { GameLoop, init, Sprite, TileEngine } from 'kontra'
+import {
+  GameLoop,
+  init,
+  initKeys,
+  keyPressed,
+  Sprite,
+  TileEngine
+} from 'kontra'
 
 /*
 640x480 screen
@@ -62,6 +69,7 @@ const c = {
   'bright-white': 15
 }
 
+/*
 const sprite = Sprite({
   width: TILE_WIDTH,
   height: TILE_HEIGHT,
@@ -77,6 +85,26 @@ const sprite = Sprite({
           this.width, this.height)
       }
     }
+  }
+})
+*/
+
+const player = Sprite({
+  width: TILE_WIDTH,
+  height: TILE_HEIGHT,
+
+  x: SCREEN_WIDTH / 2,
+  y: SCREEN_HEIGHT / 2,
+
+  anchor: {
+    x: 0.5,
+    y: 0.5
+  },
+
+  render () {
+    context.fillStyle = palette[c['red']]
+    context.fillRect(this.x - this.anchor.x * this.width,
+      this.y - this.anchor.y * this.height, this.width, this.height)
   }
 })
 
@@ -107,8 +135,8 @@ let tileEngine
       tileheight: TILE_HEIGHT,
       tilewidth: TILE_WIDTH,
 
-      width: MAP_WIDTH + 1,
-      height: MAP_HEIGHT,
+      width: MAP_WIDTH + 2,
+      height: MAP_HEIGHT + 2,
 
       tilesets: [{
         firstgid: 1,
@@ -119,21 +147,23 @@ let tileEngine
         name: 'ground',
         data: [
           /* eslint-disable indent, no-multi-spaces */
-           2,  2,  2,  2,  2,  2, 11, 11, 11, 11, 11, 11,  2,  2, 15, 15,  2,  2,  2,  2,  2,
-           2, 11, 11, 11, 11,  2, 11, 11, 11, 11, 11, 11, 11,  2, 11, 15, 11,  2,  2,  2,  2,
-          11, 11, 11, 11, 15, 15, 15,  2,  2,  2,  2,  2,  2,  2,  2, 11,  2,  2,  2,  2,  2,
-          15,  2,  2, 11, 11, 15, 11, 11,  2,  2,  2, 11,  2,  2,  2,  2,  2,  2,  2,  2,  2,
-           2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,
-           2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,
-           2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,
-           2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,
-           2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,
-           2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,
-           2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,
-           2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2, 11, 15,  2,  2,  2,  2,  2,  2,
-           2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,
-           2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,
-           2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2
+           2,  2,  2,  2,  2,  2, 11, 11, 11, 11, 11, 11,  2,  2, 15, 15,  2,  2,  2,  2,  2, 2,
+           2, 11, 11, 11, 11,  2, 11, 11, 11, 11, 11, 11, 11,  2, 11, 15, 11,  2,  2,  2,  2, 2,
+          11, 11, 11, 11, 15, 15, 15,  2,  2,  2,  2,  2,  2,  2,  2, 11,  2,  2,  2,  2,  2, 2,
+          15,  2,  2, 11, 11, 15, 11, 11,  2,  2,  2, 11,  2,  2,  2,  2,  2,  2,  2,  2,  2, 2,
+           2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2, 2,
+           2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2, 2,
+           2,  2,  2,  2, 15,  2,  2,  2,  2, 15, 15, 15,  2,  2,  2,  2,  2,  2,  2,  2,  2, 2,
+           2,  2,  2,  2,  2, 11, 11, 11, 11, 11, 11, 11, 11, 11,  2,  2,  2,  2,  2,  2,  2, 2,
+           2,  2,  2,  2,  2,  2,  2,  2,  2, 11, 11, 11, 11, 11, 11,  2,  2,  2,  2,  2,  2, 2,
+           2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2, 15, 11,  2,  2,  2,  2,  2,  2, 2,
+           2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2, 2,
+           2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2, 11, 15,  2,  2,  2,  2,  2,  2, 2,
+           2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2, 11, 15,  2,  2,  2,  2,  2,  2, 2,
+           2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2, 2,
+           2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2, 2,
+           2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2, 2,
+           2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2, 2
           /* eslint-enable indent, no-multi-spaces */
         ]
       }]
@@ -145,9 +175,9 @@ let tileEngine
   image.src = canvas2.toDataURL()
 })()
 
-function main () {
-  let dx = 0.1
+initKeys()
 
+function main () {
   const loop = GameLoop({
     render () {
       context.fillStyle = palette[c['black']]
@@ -155,14 +185,50 @@ function main () {
 
       tileEngine.render()
 
-      sprite.render()
+      // sprite.render()
+
+      player.render()
     },
 
     update () {
-      tileEngine.sx += dx
+      if (keyPressed('left')) {
+        if (player.x >= SCREEN_WIDTH / 2) {
+          --player.x
+        } else if (tileEngine.sx > 0) {
+          --tileEngine.sx
+        } else if (player.x > TILE_WIDTH / 2) {
+          --player.x
+        }
+      }
+      if (keyPressed('right')) {
+        if (player.x < SCREEN_WIDTH / 2) {
+          ++player.x
+        } else if (tileEngine.sx <
+          tileEngine.tilewidth * tileEngine.width - SCREEN_WIDTH) {
+          ++tileEngine.sx
+        } else if (player.x <= SCREEN_WIDTH - 1 - TILE_WIDTH / 2) {
+          ++player.x
+        }
+      }
 
-      if (tileEngine.sx <= 0 || tileEngine.sx >= TILE_WIDTH) {
-        dx *= -1
+      if (keyPressed('up')) {
+        if (player.y >= SCREEN_HEIGHT / 2) {
+          --player.y
+        } else if (tileEngine.sy > 0) {
+          --tileEngine.sy
+        } else if (player.y > TILE_HEIGHT / 2) {
+          --player.y
+        }
+      }
+      if (keyPressed('down')) {
+        if (player.y < SCREEN_HEIGHT / 2) {
+          ++player.y
+        } else if (tileEngine.sy <
+          tileEngine.tileheight * tileEngine.height - SCREEN_HEIGHT) {
+          ++tileEngine.sy
+        } else if (player.y <= SCREEN_HEIGHT - 1 - TILE_HEIGHT / 2) {
+          ++player.y
+        }
       }
     }
   })
