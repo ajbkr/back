@@ -19,3 +19,4 @@ Screenshots
 ![VGA 640x480, 16-color palette](screenshots/000.png "VGA 640x480, 16-color palette")
 ![Tile engine with palette overlay](screenshots/001.png "Tile engine with palette overlay")
 ![Basic player movement](screenshots/002.png "Basic player movement")
+![Virtual joystick and canvas resize](screenshots/003.png "Virtual joystick and canvas resize")
