@@ -179,7 +179,9 @@ let tileEngine
 
 initKeys()
 
-const controller = new VirtualStick()
+const controller = new VirtualStick({
+  container: document.getElementById('container')
+})
 
 function movePlayerWest () {
   if (player.x >= SCREEN_WIDTH / 2) {
@@ -251,6 +253,8 @@ function main () {
       // pal.render()
 
       player.render()
+
+      controller.draw()
     },
 
     update () {
