@@ -1,12 +1,16 @@
 /* global Image */
 import {
+  emit,
   GameLoop,
   init,
   initKeys,
+  on,
   keyPressed,
   Sprite,
   TileEngine
 } from 'kontra'
+
+const VirtualStick = exports.VirtualStick // XXX
 
 /*
 640x480 screen
@@ -177,7 +181,51 @@ let tileEngine
 
 initKeys()
 
+const controller = new VirtualStick()
+
 function main () {
+  on('move-player-west', () => {
+    if (player.x >= SCREEN_WIDTH / 2) {
+      --player.x
+    } else if (tileEngine.sx > 0) {
+      --tileEngine.sx
+    } else if (player.x > TILE_WIDTH / 2) {
+      --player.x
+    }
+  })
+
+  on('move-player-east', () => {
+    if (player.x < SCREEN_WIDTH / 2) {
+      ++player.x
+    } else if (tileEngine.sx <
+      tileEngine.tilewidth * tileEngine.width - SCREEN_WIDTH) {
+      ++tileEngine.sx
+    } else if (player.x <= SCREEN_WIDTH - 1 - TILE_WIDTH / 2) {
+      ++player.x
+    }
+  })
+
+  on('move-player-north', () => {
+    if (player.y >= SCREEN_HEIGHT / 2) {
+      --player.y
+    } else if (tileEngine.sy > 0) {
+      --tileEngine.sy
+    } else if (player.y > TILE_HEIGHT / 2) {
+      --player.y
+    }
+  })
+
+  on('move-player-south', () => {
+    if (player.y < SCREEN_HEIGHT / 2) {
+      ++player.y
+    } else if (tileEngine.sy <
+      tileEngine.tileheight * tileEngine.height - SCREEN_HEIGHT) {
+      ++tileEngine.sy
+    } else if (player.y <= SCREEN_HEIGHT - 1 - TILE_HEIGHT / 2) {
+      ++player.y
+    }
+  })
+
   const loop = GameLoop({
     render () {
       context.fillStyle = palette[c['black']]
@@ -192,43 +240,29 @@ function main () {
 
     update () {
       if (keyPressed('left')) {
-        if (player.x >= SCREEN_WIDTH / 2) {
-          --player.x
-        } else if (tileEngine.sx > 0) {
-          --tileEngine.sx
-        } else if (player.x > TILE_WIDTH / 2) {
-          --player.x
-        }
+        emit('move-player-west')
       }
       if (keyPressed('right')) {
-        if (player.x < SCREEN_WIDTH / 2) {
-          ++player.x
-        } else if (tileEngine.sx <
-          tileEngine.tilewidth * tileEngine.width - SCREEN_WIDTH) {
-          ++tileEngine.sx
-        } else if (player.x <= SCREEN_WIDTH - 1 - TILE_WIDTH / 2) {
-          ++player.x
-        }
+        emit('move-player-east')
       }
-
       if (keyPressed('up')) {
-        if (player.y >= SCREEN_HEIGHT / 2) {
-          --player.y
-        } else if (tileEngine.sy > 0) {
-          --tileEngine.sy
-        } else if (player.y > TILE_HEIGHT / 2) {
-          --player.y
-        }
+        emit('move-player-north')
       }
       if (keyPressed('down')) {
-        if (player.y < SCREEN_HEIGHT / 2) {
-          ++player.y
-        } else if (tileEngine.sy <
-          tileEngine.tileheight * tileEngine.height - SCREEN_HEIGHT) {
-          ++tileEngine.sy
-        } else if (player.y <= SCREEN_HEIGHT - 1 - TILE_HEIGHT / 2) {
-          ++player.y
-        }
+        emit('move-player-south')
+      }
+
+      const { dx, dy } = controller.getAxis()
+
+      if (dx < 0) {
+        emit('move-player-west')
+      } else if (dx > 0) {
+        emit('move-player-east')
+      }
+      if (dy < 0) {
+        emit('move-player-north')
+      } else if (dy > 0) {
+        emit('move-player-south')
       }
     }
   })
