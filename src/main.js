@@ -10,20 +10,14 @@ import {
 
 const VirtualStick = exports.VirtualStick // XXX
 
-/*
-640x480 screen
-32x32 tilesize
-20x15 tiles
-*/
-
 const SCREEN_WIDTH = 640
 const SCREEN_HEIGHT = 480
 
 const TILE_WIDTH = 32
 const TILE_HEIGHT = 32
 
-const MAP_WIDTH = 20
-const MAP_HEIGHT = 15
+const MAP_WIDTH = SCREEN_WIDTH / TILE_WIDTH
+const MAP_HEIGHT = SCREEN_HEIGHT / TILE_HEIGHT
 
 const { canvas, context } = init()
 
@@ -92,16 +86,18 @@ const pal = Sprite({
 */
 
 const player = Sprite({
-  width: TILE_WIDTH,
-  height: TILE_HEIGHT,
+  width: TILE_WIDTH / 4 * 3,
+  height: TILE_HEIGHT / 4 * 3,
 
-  x: SCREEN_WIDTH / 2,
-  y: SCREEN_HEIGHT / 2,
+  x: TILE_WIDTH * 7,
+  y: TILE_HEIGHT / 2,
 
+  /*
   anchor: {
     x: 0.5,
     y: 0.5
   },
+  */
 
   render () {
     context.fillStyle = palette[c['red']]
@@ -151,15 +147,15 @@ let tileEngine
           /* eslint-disable indent, no-multi-spaces */
            2,  2,  2,  2,  2,  2, 11, 11, 11, 11, 11, 11,  2,  2, 15, 15,  2,  2,  2,  2,  2, 2,
            2, 11, 11, 11, 11,  2, 11, 11, 11, 11, 11, 11, 11,  2, 11, 15, 11,  2,  2,  2,  2, 2,
-          11, 11, 11, 11, 15, 15, 15,  2,  2,  2,  2,  2,  2,  2,  2, 11,  2,  2,  2,  2,  2, 2,
-          15,  2,  2, 11, 11, 15, 11, 11,  2,  2,  2, 11,  2,  2,  2,  2,  2,  2,  2,  2,  2, 2,
-           2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2, 2,
-           2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2, 2,
-           2,  2,  2,  2, 15,  2,  2,  2,  2, 15, 15, 15,  2,  2,  2,  2,  2,  2,  2,  2,  2, 2,
-           2,  2,  2,  2,  2, 11, 11, 11, 11, 11, 11, 11, 11, 11,  2,  2,  2,  2,  2,  2,  2, 2,
+          11, 11, 11, 11, 15, 15, 15, 11,  2,  2,  2,  2,  2,  2,  2, 11,  2,  2,  2,  2,  2, 2,
+          15,  2,  2, 11, 11, 15, 11, 11, 11,  2,  2, 11,  2,  2,  2,  2,  2,  2,  2,  2,  2, 2,
+           2,  2,  2,  2,  2,  2,  2, 11, 11, 11,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2, 2,
+           2,  2,  2,  2,  2,  2,  2, 11, 15, 15,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2, 2,
+           2,  2,  2,  2, 15,  2,  2,  2, 11, 15, 15, 15,  2,  2,  2,  2,  2,  2,  2,  2,  2, 2,
+           2,  2,  2,  9,  9, 11, 11, 11, 11, 11, 11, 11, 11, 11,  2,  2,  2,  2,  2,  2,  2, 2,
            2,  2,  2,  2,  2,  2,  2,  2,  2, 11, 11, 11, 11, 11, 11,  2,  2,  2,  2,  2,  2, 2,
            2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2, 15, 11,  2,  2,  2,  2,  2,  2, 2,
-           2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2, 2,
+           2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2, 10, 10,  2,  2,  2,  2,  2,  2, 2,
            2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2, 11, 15,  2,  2,  2,  2,  2,  2, 2,
            2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2, 11, 15,  2,  2,  2,  2,  2,  2, 2,
            2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2, 2,
@@ -167,6 +163,27 @@ let tileEngine
            2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2, 2,
            2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2, 2
           /* eslint-enable indent, no-multi-spaces */
+        ]
+      }, {
+        name: 'collision',
+        data: [
+          1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1,
+          1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 1, 1,
+          0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1,
+          0, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+          1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+          1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+          1, 1, 1, 1, 0, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+          1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1,
+          1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1,
+          1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1,
+          1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1,
+          1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1,
+          1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1,
+          1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+          1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+          1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+          1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1
         ]
       }]
     })
@@ -184,44 +201,80 @@ const controller = new VirtualStick({
 })
 
 function movePlayerWest () {
-  if (player.x >= SCREEN_WIDTH / 2) {
-    --player.x
+  const { height, width, y } = player
+  let { x } = player
+
+  if (x + width / 2 >= SCREEN_WIDTH / 2) {
+    --x
+  /*
   } else if (tileEngine.sx > 0) {
     --tileEngine.sx
-  } else if (player.x > TILE_WIDTH / 2) {
-    --player.x
+  */
+  } else if (x > 0) {
+    --x
+  }
+
+  if (!tileEngine.layerCollidesWith('collision', { height, width, x, y })) {
+    player.x = x
   }
 }
 
 function movePlayerEast () {
-  if (player.x < SCREEN_WIDTH / 2) {
-    ++player.x
+  const { height, width, y } = player
+  let { x } = player
+
+  if (x + width / 2 < SCREEN_WIDTH / 2) {
+    ++x
+  /*
   } else if (tileEngine.sx <
     tileEngine.tilewidth * tileEngine.width - SCREEN_WIDTH) {
     ++tileEngine.sx
-  } else if (player.x <= SCREEN_WIDTH - 1 - TILE_WIDTH / 2) {
-    ++player.x
+  */
+  } else if (x <= SCREEN_WIDTH - 1 - width) {
+    ++x
+  }
+
+  if (!tileEngine.layerCollidesWith('collision', { height, width, x, y })) {
+    player.x = x
   }
 }
 
 function movePlayerNorth () {
-  if (player.y >= SCREEN_HEIGHT / 2) {
-    --player.y
+  const { height, width, x } = player
+  let { y } = player
+
+  if (y + height / 2 >= SCREEN_HEIGHT / 2) {
+    --y
+  /*
   } else if (tileEngine.sy > 0) {
     --tileEngine.sy
-  } else if (player.y > TILE_HEIGHT / 2) {
-    --player.y
+  */
+  } else if (y > 0) {
+    --y
+  }
+
+  if (!tileEngine.layerCollidesWith('collision', { height, width, x, y })) {
+    player.y = y
   }
 }
 
 function movePlayerSouth () {
-  if (player.y < SCREEN_HEIGHT / 2) {
-    ++player.y
+  const { height, width, x } = player
+  let { y } = player
+
+  if (y + height / 2 < SCREEN_HEIGHT / 2) {
+    ++y
+  /*
   } else if (tileEngine.sy <
     tileEngine.tileheight * tileEngine.height - SCREEN_HEIGHT) {
     ++tileEngine.sy
-  } else if (player.y <= SCREEN_HEIGHT - 1 - TILE_HEIGHT / 2) {
-    ++player.y
+  */
+  } else if (y <= SCREEN_HEIGHT - 1 - height) {
+    ++y
+  }
+
+  if (!tileEngine.layerCollidesWith('collision', { height, width, x, y })) {
+    player.y = y
   }
 }
 
@@ -248,7 +301,7 @@ function main () {
       context.fillStyle = palette[c['black']]
       context.fillRect(0, 0, context.canvas.width, context.canvas.height)
 
-      tileEngine.render()
+      tileEngine.renderLayer('ground')
 
       // pal.render()
 

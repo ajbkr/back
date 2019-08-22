@@ -9,7 +9,7 @@
     "dev": "rollup -c -w",
     "lint": "standard rollup.config.js 'src/**/*.js'",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "zip": "cd dist && zip ../back.zip index.html"
+    "zip": "cd dist && zip ../back.zip index.html && advzip -z4 ../back.zip"
   },
   "keywords": [
     "js13k",
