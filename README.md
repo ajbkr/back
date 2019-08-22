@@ -11,7 +11,7 @@ Live Demo
 
 Arrow keys to move.
 
-[Play now!](https://ajbkr.github.io/back)
+[Play now!](https://ajbkr.github.io/back/)
 
 Screenshots
 -----------
@@ -20,3 +20,4 @@ Screenshots
 ![Tile engine with palette overlay](screenshots/001.png "Tile engine with palette overlay")
 ![Basic player movement](screenshots/002.png "Basic player movement")
 ![Virtual joystick and canvas resize](screenshots/003.png "Virtual joystick and canvas resize")
+![Add collision layer to tile engine](screenshots/004.png "Add collision layer to tile engine")
