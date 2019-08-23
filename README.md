@@ -9,9 +9,9 @@ the [Kontra](https://straker.github.io/kontra/) micro-library.
 Live Demo
 ---------
 
-Arrow keys to move.
-
 [Play now!](https://ajbkr.github.io/back/)
+
+Arrow keys to move on desktop; virtual joystick to move on mobile/tablet.
 
 Screenshots
 -----------
