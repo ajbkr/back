@@ -85,6 +85,26 @@ const pal = Sprite({
 })
 */
 
+const debug = Sprite({
+  width: SCREEN_WIDTH,
+  height: TILE_HEIGHT,
+
+  x: 0,
+  y: 0,
+
+  text: '',
+
+  render () {
+    context.fillStyle = 'rgba(0, 0, 0, 0.5)'
+    context.fillRect(this.x, this.y, this.width, this.height)
+
+    context.font = TILE_HEIGHT + 'px serif'
+
+    context.fillStyle = palette[c['white']]
+    context.fillText(this.text, this.x, this.y + TILE_HEIGHT / 4 * 3, SCREEN_WIDTH)
+  }
+})
+
 const player = Sprite({
   width: TILE_WIDTH / 4 * 3,
   height: TILE_HEIGHT / 4 * 3,
@@ -92,17 +112,10 @@ const player = Sprite({
   x: TILE_WIDTH * 7,
   y: TILE_HEIGHT / 2,
 
-  /*
-  anchor: {
-    x: 0.5,
-    y: 0.5
-  },
-  */
-
   render () {
     context.fillStyle = palette[c['red']]
-    context.fillRect(this.x - this.anchor.x * this.width,
-      this.y - this.anchor.y * this.height, this.width, this.height)
+    context.fillRect(this.x - tileEngine.sx, this.y - tileEngine.sy, this.width,
+      this.height)
   }
 })
 
@@ -204,38 +217,67 @@ function movePlayerWest () {
   const { height, width, y } = player
   let { x } = player
 
-  if (x + width / 2 >= SCREEN_WIDTH / 2) {
+  const { sy, tilewidth } = tileEngine
+  let { sx } = tileEngine
+
+  if (x >= SCREEN_WIDTH / 2 - width / 2) {
     --x
-  /*
-  } else if (tileEngine.sx > 0) {
-    --tileEngine.sx
-  */
+  } else if (sx > 0) {
+    --sx
+    --x
   } else if (x > 0) {
     --x
   }
 
-  if (!tileEngine.layerCollidesWith('collision', { height, width, x, y })) {
+  if (!tileEngine.layerCollidesWith('collision', {
+    height,
+    width,
+    x: x - tileEngine.sx,
+    y: y - tileEngine.sy
+  })) {
     player.x = x
+  }
+  if (!tileEngine.layerCollidesWith('collision', {
+    height,
+    width,
+    x: x - sx,
+    y: y - sy
+  })) {
+    tileEngine.sx = sx
   }
 }
 
 function movePlayerEast () {
   const { height, width, y } = player
   let { x } = player
+  
+  const { sy, tilewidth } = tileEngine
+  let { sx } = tileEngine
 
-  if (x + width / 2 < SCREEN_WIDTH / 2) {
+  if (x < SCREEN_WIDTH / 2 - width / 2) {
     ++x
-  /*
-  } else if (tileEngine.sx <
-    tileEngine.tilewidth * tileEngine.width - SCREEN_WIDTH) {
-    ++tileEngine.sx
-  */
+  } else if (sx < tilewidth * tileEngine.width - SCREEN_WIDTH) {
+    ++sx
+    ++x
   } else if (x <= SCREEN_WIDTH - 1 - width) {
     ++x
   }
 
-  if (!tileEngine.layerCollidesWith('collision', { height, width, x, y })) {
+  if (!tileEngine.layerCollidesWith('collision', {
+    height,
+    width,
+    x: x - tileEngine.sx,
+    y: y - tileEngine.sy
+  })) {
     player.x = x
+  }
+  if (!tileEngine.layerCollidesWith('collision', {
+    height,
+    width,
+    x: x - sx,
+    y: y - sy
+  })) {
+    tileEngine.sx = sx
   }
 }
 
@@ -243,18 +285,33 @@ function movePlayerNorth () {
   const { height, width, x } = player
   let { y } = player
 
-  if (y + height / 2 >= SCREEN_HEIGHT / 2) {
+  const { sx, tileheight } = tileEngine
+  let { sy } = tileEngine
+
+  if (y >= SCREEN_HEIGHT / 2 - height / 2) {
     --y
-  /*
-  } else if (tileEngine.sy > 0) {
-    --tileEngine.sy
-  */
+  } else if (sy > 0) {
+    --sy
+    --y
   } else if (y > 0) {
     --y
   }
 
-  if (!tileEngine.layerCollidesWith('collision', { height, width, x, y })) {
+  if (!tileEngine.layerCollidesWith('collision', {
+    height,
+    width,
+    x: x - tileEngine.sx,
+    y: y - tileEngine.sy
+  })) {
     player.y = y
+  }
+  if (!tileEngine.layerCollidesWith('collision', {
+    height,
+    width,
+    x: x - sx,
+    y: y - sy
+  })) {
+    tileEngine.sy = sy
   }
 }
 
@@ -262,19 +319,33 @@ function movePlayerSouth () {
   const { height, width, x } = player
   let { y } = player
 
-  if (y + height / 2 < SCREEN_HEIGHT / 2) {
+  const { sx, tileheight } = tileEngine
+  let { sy } = tileEngine
+
+  if (y < SCREEN_HEIGHT / 2 - height / 2) {
     ++y
-  /*
-  } else if (tileEngine.sy <
-    tileEngine.tileheight * tileEngine.height - SCREEN_HEIGHT) {
-    ++tileEngine.sy
-  */
+  } else if (sy < tileheight * tileEngine.height - SCREEN_HEIGHT) {
+    ++sy
+    ++y
   } else if (y <= SCREEN_HEIGHT - 1 - height) {
     ++y
   }
 
-  if (!tileEngine.layerCollidesWith('collision', { height, width, x, y })) {
+  if (!tileEngine.layerCollidesWith('collision', {
+    height,
+    width,
+    x: x - tileEngine.sx,
+    y: y - tileEngine.sy
+  })) {
     player.y = y
+  }
+  if (!tileEngine.layerCollidesWith('collision', {
+    height,
+    width,
+    x: x - sx,
+    y: y - sy
+  })) {
+    tileEngine.sy = sy
   }
 }
 
@@ -307,6 +378,8 @@ function main () {
 
       player.render()
 
+      debug.render()
+
       controller.draw()
     },
 
@@ -336,6 +409,10 @@ function main () {
       } else if (dy > 0) {
         movePlayerSouth()
       }
+
+      debug.text = '(' + player.x + ', ' + player.y + ') (' +
+        tileEngine.sx + ', ' + tileEngine.sy + ') (' +
+        (player.x - tileEngine.sx) + ', ' + (player.y - tileEngine.sy) + ')'
     }
   })
 

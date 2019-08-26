@@ -21,3 +21,4 @@ Screenshots
 ![Basic player movement](screenshots/002.png "Basic player movement")
 ![Virtual joystick and canvas resize](screenshots/003.png "Virtual joystick and canvas resize")
 ![Add collision layer to tile engine](screenshots/004.png "Add collision layer to tile engine")
+![Debug camera pan](screenshots/005.png "Debug camera pan")
