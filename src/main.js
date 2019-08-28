@@ -100,7 +100,7 @@ const debug = Sprite({
 
     context.font = TILE_HEIGHT + 'px serif'
 
-    context.fillStyle = palette[c['white']]
+    context.fillStyle = palette[c.white]
     context.fillText(this.text, this.x, this.y + TILE_HEIGHT / 4 * 3, SCREEN_WIDTH)
   }
 })
@@ -113,7 +113,7 @@ const player = Sprite({
   y: TILE_HEIGHT / 2,
 
   render () {
-    context.fillStyle = palette[c['red']]
+    context.fillStyle = palette[c.red]
     context.fillRect(this.x - tileEngine.sx, this.y - tileEngine.sy, this.width,
       this.height)
   }
@@ -129,7 +129,7 @@ let tileEngine
 
   const context2 = canvas2.getContext('2d')
 
-  context2.fillStyle = palette[c['black']]
+  context2.fillStyle = palette[c.black]
   context2.fillRect(0, 0, canvas2.width, canvas2.height)
 
   for (let y = 0; y < 4; ++y) {
@@ -217,7 +217,7 @@ function movePlayerWest () {
   const { height, width, y } = player
   let { x } = player
 
-  const { sy, tilewidth } = tileEngine
+  const { sy } = tileEngine
   let { sx } = tileEngine
 
   if (x >= SCREEN_WIDTH / 2 - width / 2) {
@@ -250,13 +250,13 @@ function movePlayerWest () {
 function movePlayerEast () {
   const { height, width, y } = player
   let { x } = player
-  
+
   const { sy, tilewidth } = tileEngine
   let { sx } = tileEngine
 
   if (x < SCREEN_WIDTH / 2 - width / 2) {
     ++x
-  } else if (sx < tilewidth * tileEngine.width - SCREEN_WIDTH) {
+  } else if (sx < tilewidth * tileEngine.width - SCREEN_WIDTH - 1) {
     ++sx
     ++x
   } else if (x <= SCREEN_WIDTH - 1 - width) {
@@ -285,7 +285,7 @@ function movePlayerNorth () {
   const { height, width, x } = player
   let { y } = player
 
-  const { sx, tileheight } = tileEngine
+  const { sx } = tileEngine
   let { sy } = tileEngine
 
   if (y >= SCREEN_HEIGHT / 2 - height / 2) {
@@ -324,7 +324,7 @@ function movePlayerSouth () {
 
   if (y < SCREEN_HEIGHT / 2 - height / 2) {
     ++y
-  } else if (sy < tileheight * tileEngine.height - SCREEN_HEIGHT) {
+  } else if (sy < tileheight * tileEngine.height - SCREEN_HEIGHT - 1) {
     ++sy
     ++y
   } else if (y <= SCREEN_HEIGHT - 1 - height) {
@@ -369,7 +369,7 @@ function main () {
 
   const loop = GameLoop({
     render () {
-      context.fillStyle = palette[c['black']]
+      context.fillStyle = palette[c.black]
       context.fillRect(0, 0, context.canvas.width, context.canvas.height)
 
       tileEngine.renderLayer('ground')
