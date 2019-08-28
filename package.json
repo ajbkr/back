@@ -19,7 +19,7 @@
   "author": "Andrew J. Baker <andrew_j_baker2@hotmail.com>",
   "license": "ISC",
   "dependencies": {
-    "kontra": "^6.4.0",
+    "kontra": "6.3.0",
     "virtual-stick": "^1.0.6"
   },
   "devDependencies": {
