@@ -1,10 +1,9 @@
-Back [to the Island]
-====================
+Back to the Island
+==================
 
 js13kGames 2019 entry, theme: "back".
 
-An H. P. Lovecraft-inspired mini-RPG/adventure game written in JavaScript using
-the [Kontra](https://straker.github.io/kontra/) micro-library.
+An H. P. Lovecraft-inspired mini-RPG/adventure game written in JavaScript.
 
 Live Demo
 ---------
@@ -12,6 +11,15 @@ Live Demo
 [Play now!](https://ajbkr.github.io/back/)
 
 Arrow keys to move on desktop; virtual joystick to move on mobile/tablet.
+
+Dependencies
+------------
+
+Back to the Island makes use of the following libraries/tools:
+
+* [Kontra](https://straker.github.io/kontra/)
+* [Virtual Stick](https://www.npmjs.com/package/virtual-stick)
+* [ZzFX](http://www.3d2k.com/js/zzfx/)
 
 Screenshots
 -----------

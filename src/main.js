@@ -1,4 +1,4 @@
-/* global Image, zzfx */
+/* global Image */
 import {
   GameLoop,
   init,
@@ -7,6 +7,8 @@ import {
   Sprite,
   TileEngine
 } from 'kontra'
+
+import playSound from './play-sound'
 
 const VirtualStick = exports.VirtualStick // XXX
 
@@ -213,19 +215,6 @@ const controller = new VirtualStick({
   container: document.getElementById('container')
 })
 
-const intervalIDs = {}
-
-function playCollision () {
-  if (!intervalIDs.collision) {
-    zzfx(1, 0.1, 28, 0.4, 0.66, 0.8, 0.1, 0.3, 0.57) // ZzFX 10114
-
-    intervalIDs.collision = window.setInterval(function () {
-      window.clearInterval(intervalIDs.collision)
-      intervalIDs.collision = null
-    }, 0.4 * 1000)
-  }
-}
-
 function movePlayerWest () {
   const { height, width, y } = player
   let { x } = player
@@ -250,7 +239,7 @@ function movePlayerWest () {
   })) {
     player.x = x
   } else {
-    playCollision()
+    playSound('collision')
   }
   if (!tileEngine.layerCollidesWith('collision', {
     height,
@@ -286,7 +275,7 @@ function movePlayerEast () {
   })) {
     player.x = x
   } else {
-    playCollision()
+    playSound('collision')
   }
   if (!tileEngine.layerCollidesWith('collision', {
     height,
@@ -322,7 +311,7 @@ function movePlayerNorth () {
   })) {
     player.y = y
   } else {
-    playCollision()
+    playSound('collision')
   }
   if (!tileEngine.layerCollidesWith('collision', {
     height,
@@ -358,7 +347,7 @@ function movePlayerSouth () {
   })) {
     player.y = y
   } else {
-    playCollision()
+    playSound('collision')
   }
   if (!tileEngine.layerCollidesWith('collision', {
     height,
