@@ -6,7 +6,8 @@ const intervalIDs = {}
 //
 // http://www.3d2k.com/js/zzfx/
 const sounds = {
-  collision: [1, 0.1, 28, 0.4, 0.66, 0.8, 0.1, 0.3, 0.57] // ZzFX 10114
+  collision: [1, 0.1, 726, 0.2, 0.1, 0, 1, 0, 0.37], // ZzFX 8269
+  'old-collision': [1, 0.1, 28, 0.4, 0.66, 0.8, 0.1, 0.3, 0.57] // ZzFX 10114
 }
 
 function playSound (name) {
