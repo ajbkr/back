@@ -10,16 +10,25 @@ const production = !process.env.ROLLUP_WATCH
 
 export default {
   external: [
-    'VirtualStick'
+    'VirtualStick',
+    'zzfx'
   ],
   input: 'src/main.js',
   output: {
-    banner: 'exports={};' + fs.readFileSync(path.join(__dirname,
-      'node_modules/virtual-stick/dist/bundle.js'), 'utf-8'),
+    banner:
+      'exports={};' + fs.readFileSync(path.join(
+        __dirname,
+        'node_modules/virtual-stick/dist/bundle.js'
+      ), 'utf-8') +
+      ';' + fs.readFileSync(path.join(
+        __dirname,
+        'node_modules/zzfx/ZzFX.micro.js'
+      ), 'utf-8'),
     file: 'dist/bundle.js',
     format: 'iife',
     globals: {
-      VirtualStick: 'VirtualStick'
+      VirtualStick: 'VirtualStick',
+      zzfx: 'zzfx'
     }
   },
   plugins: [
