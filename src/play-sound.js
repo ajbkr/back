@@ -21,4 +21,6 @@ function playSound (name) {
   }
 }
 
-export default playSound
+export {
+  playSound
+}
