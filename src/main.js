@@ -1,25 +1,21 @@
-/* global Image */
 import {
   GameLoop,
   init,
   initKeys,
-  keyPressed,
-  Sprite,
-  TileEngine
+  keyPressed
 } from 'kontra'
 
 import {
-  MAP_HEIGHT,
-  MAP_WIDTH,
   SCREEN_HEIGHT,
-  SCREEN_WIDTH,
-  TILE_HEIGHT,
-  TILE_WIDTH
+  SCREEN_WIDTH
 } from './config'
 import { makeDebugSprite } from './debug'
 // import { c, makePaletteSprite, palette } from './palette'
 import { c, palette } from './palette'
-import { playSound } from './play-sound'
+import { makePlayerSprite } from './player'
+import { makeResizeCanvas } from './resize'
+import { playSound } from './sound'
+import { initTileEngine } from './tile-engine'
 
 const VirtualStick = exports.VirtualStick // XXX
 
@@ -30,111 +26,9 @@ canvas.height = SCREEN_HEIGHT
 
 // const pal = makePaletteSprite(context)
 
-const debug = makeDebugSprite(context)
-
-const player = Sprite({
-  width: TILE_WIDTH / 4 * 3,
-  height: TILE_HEIGHT / 4 * 3,
-
-  x: TILE_WIDTH * 7,
-  y: TILE_HEIGHT / 2,
-
-  render () {
-    context.fillStyle = palette[c.red]
-    context.fillRect(this.x - tileEngine.sx, this.y - tileEngine.sy, this.width,
-      this.height)
-  }
-})
+let player
 
 let tileEngine
-
-function initTileEngine (cb) {
-  const canvas2 = document.createElement('canvas')
-
-  canvas2.width = TILE_WIDTH * 4
-  canvas2.height = TILE_HEIGHT * 4
-
-  const context2 = canvas2.getContext('2d')
-
-  context2.fillStyle = palette[c.black]
-  context2.fillRect(0, 0, canvas2.width, canvas2.height)
-
-  for (let y = 0; y < 4; ++y) {
-    for (let x = 0; x < 4; ++x) {
-      context2.fillStyle = palette[y * 4 + x]
-      context2.fillRect(x * TILE_WIDTH, y * TILE_HEIGHT, TILE_WIDTH, TILE_HEIGHT)
-    }
-  }
-
-  const image = new Image()
-
-  image.onload = function () {
-    tileEngine = TileEngine({
-      tileheight: TILE_HEIGHT,
-      tilewidth: TILE_WIDTH,
-
-      width: MAP_WIDTH + 2,
-      height: MAP_HEIGHT + 2,
-
-      tilesets: [{
-        firstgid: 1,
-        image
-      }],
-
-      layers: [{
-        name: 'ground',
-        data: [
-          /* eslint-disable indent, no-multi-spaces */
-           2,  2,  2,  2,  2,  2, 11, 11, 11, 11, 11, 11,  2,  2, 15, 15,  2,  2,  2,  2,  2,  2,
-           2, 11, 11, 11, 11,  2, 11, 11, 11, 11, 11, 11, 11,  2, 11, 15, 11,  2,  2,  2,  2,  2,
-          11, 11, 11, 11, 15, 15, 15, 11,  2,  2,  2,  2,  2,  2,  2, 11,  2,  2,  2,  2,  2,  2,
-          15,  2,  2, 11, 11, 15, 11, 11, 11,  2,  2, 11,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,
-           2,  2,  2,  2,  2,  2,  2, 11, 11, 11,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,
-           2,  2,  2,  2,  2,  2,  2, 11, 15, 15,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,
-           2,  2,  2,  2, 15,  2,  2,  2, 11, 15, 15, 15,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,
-           2,  2,  2,  9,  9, 11, 11, 11, 11, 11, 11, 11, 11, 11,  2,  2,  2,  2,  2,  2,  2,  2,
-           2,  2,  2,  2,  2,  2,  2,  2,  2, 11, 11, 11, 11, 11, 11,  2,  2,  2,  2,  2,  2,  2,
-           2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2, 15, 11,  2,  2,  2,  2,  2,  2,  2,
-           2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2, 10, 10,  2,  2,  2,  2,  2,  2,  2,
-           2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2, 11, 15,  2,  2,  2,  2,  2,  2,  2,
-           2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2, 11, 15, 10, 10, 10, 10, 10, 10, 10,
-           2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2, 10,
-           2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2, 10,
-           2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2, 10,
-           2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2, 10
-          /* eslint-enable indent, no-multi-spaces */
-        ]
-      }, {
-        name: 'collision',
-        data: [
-          1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1,
-          1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 1, 1,
-          0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1,
-          0, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-          1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-          1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-          1, 1, 1, 1, 0, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-          1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1,
-          1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1,
-          1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1,
-          1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1,
-          1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1,
-          1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-          1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0,
-          1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0,
-          1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0,
-          1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0
-        ]
-      }]
-    })
-
-    if (typeof cb === 'function') {
-      cb()
-    }
-  }
-
-  image.src = canvas2.toDataURL()
-}
 
 function movePlayerWest () {
   const { height, width, y } = player
@@ -280,22 +174,16 @@ function movePlayerSouth () {
   }
 }
 
-function resizeCanvas () {
-  const { innerWidth, innerHeight } = window
-  const windowRatio = innerWidth / innerHeight
-  const canvasRatio = SCREEN_WIDTH / SCREEN_HEIGHT
-
-  if (windowRatio < canvasRatio) {
-    canvas.style.width = innerWidth + 'px'
-    canvas.style.height = (innerWidth / canvasRatio) + 'px'
-  } else {
-    canvas.style.width = (innerHeight * canvasRatio) + 'px'
-    canvas.style.height = innerHeight + 'px'
-  }
-}
-
 function main () {
-  initTileEngine(() => {
+  initTileEngine(tileEngine2 => {
+    tileEngine = tileEngine2
+
+    const debug = makeDebugSprite(context)
+
+    player = makePlayerSprite(context, tileEngine)
+
+    const resizeCanvas = makeResizeCanvas(canvas)
+
     resizeCanvas()
     window.addEventListener('resize', resizeCanvas)
 
