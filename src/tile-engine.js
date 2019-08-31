@@ -10,20 +10,20 @@ import {
 import { c, palette } from './palette'
 
 function initTileEngine (cb) {
-  const canvas2 = document.createElement('canvas')
+  const canvas = document.createElement('canvas')
 
-  canvas2.width = TILE_WIDTH * 4
-  canvas2.height = TILE_HEIGHT * 4
+  canvas.width = TILE_WIDTH * 4
+  canvas.height = TILE_HEIGHT * 4
 
-  const context2 = canvas2.getContext('2d')
+  const context = canvas.getContext('2d')
 
-  context2.fillStyle = palette[c.black]
-  context2.fillRect(0, 0, canvas2.width, canvas2.height)
+  context.fillStyle = palette[c.black]
+  context.fillRect(0, 0, canvas.width, canvas.height)
 
   for (let y = 0; y < 4; ++y) {
     for (let x = 0; x < 4; ++x) {
-      context2.fillStyle = palette[y * 4 + x]
-      context2.fillRect(x * TILE_WIDTH, y * TILE_HEIGHT, TILE_WIDTH, TILE_HEIGHT)
+      context.fillStyle = palette[y * 4 + x]
+      context.fillRect(x * TILE_WIDTH, y * TILE_HEIGHT, TILE_WIDTH, TILE_HEIGHT)
     }
   }
 
@@ -94,7 +94,7 @@ function initTileEngine (cb) {
     }
   }
 
-  image.src = canvas2.toDataURL()
+  image.src = canvas.toDataURL()
 }
 
 export {
