@@ -8,6 +8,8 @@ An H. P. Lovecraft-inspired mini-RPG/adventure game written in JavaScript.
 Live Demo
 ---------
 
+"I had no intention, none whatsoever, of going back... BACK TO THE ISLAND."
+
 [Play now!](https://ajbkr.github.io/back/)
 
 Arrow keys to move on desktop; virtual joystick to move on mobile/tablet.
@@ -30,3 +32,4 @@ Screenshots
 ![Virtual joystick and canvas resize](screenshots/003.png "Virtual joystick and canvas resize")
 ![Add collision layer to tile engine](screenshots/004.png "Add collision layer to tile engine")
 ![Debug camera pan](screenshots/005.png "Debug camera pan")
+![Rudimentary 4x6 bitmap font](screenshots/006.png "Rudimentary 4x6 bitmap font")

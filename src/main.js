@@ -62,9 +62,43 @@ function main () {
 
         player.render()
 
-        // font.render()
-        font.outputTextXY(0, 0, 'BACK TO THE ISLAND')
-        font.outputTextXY(0, 6, 'BY ANDREW J. BAKER')
+        //font.render()
+        /* font.x = font.y = 0
+        font.outputText('BACK TO THE ISLAND')
+        font.y = 6
+        font.outputText('BY ANDREW J. BAKER') */
+        font.x = 4
+        font.y = 6
+        font.outputText('I HAD NO INTENTION, NONE WHATSOEVER, OF GOING BACK...')
+        font.x = 188
+        font.y = 18
+        font.outputText('BACK TO THE ISLAND.')
+        /*
+        font.y = 18
+        font.outputText('AND YET HERE I FIND MYSELF AS I STEP FROM THE GANGPLANK')
+        font.y = 24
+        font.outputText('OF A CALMAC FERRY, BEFORE PICKING MY WAY DEFTLY THROUGH THE')
+        font.y = 30
+        font.outputText('CROWDS OF ARRIVING TOURISTS. I AM REVISITING THAT LARGEST AND MOST')
+        font.y = 36
+        font.outputText('NORTHERLY MEMBER OF THE HEBRIDEAN ARCHIPELAGO,')
+        font.y = 42
+        font.outputText('THE ISLE OF LEWIS.')
+
+        font.y = 54
+        font.outputText('MY NAME IS MEL KNOX. I AM WELL-VERSED IN THE ARCANE ARTS.')
+        font.y = 60
+        font.outputText('I AM A SENTINEL')
+        font.y = 66
+        font.outputText('AND I AM HERE TO RELUCTANTLY RESUME MY INVESTIGATION')
+        font.y = 72
+        font.outputText('INTO THE DOINGS AND SHADOWY DEALINGS OF "THE ESOTERIC ORDER OF DAGON".')
+
+        font.y = 84
+        font.outputText('I CAUTIOUSLY EXIT THE FERRY PORT AT STORNOWAY HARBOUR AND HEAD DIRECTLY')
+        font.y = 90
+        font.outputText('FOR THE TAXI RANK.')
+        */
 
         // debug.render()
 
