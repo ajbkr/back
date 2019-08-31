@@ -10,6 +10,7 @@ import {
   SCREEN_WIDTH
 } from './config'
 import { makeDebugSprite } from './debug'
+import { makeFontSprite } from './font'
 // import { c, makePaletteSprite, palette } from './palette'
 import { c, palette } from './palette'
 import { makePlayerSprite } from './player'
@@ -32,6 +33,8 @@ let tileEngine
 function main () {
   initTileEngine(tileEngine2 => {
     tileEngine = tileEngine2
+
+    const font = makeFontSprite()
 
     const debug = makeDebugSprite(context)
 
@@ -59,7 +62,11 @@ function main () {
 
         player.render()
 
-        debug.render()
+        // font.render()
+        font.outputTextXY(0, 0, 'BACK TO THE ISLAND')
+        font.outputTextXY(0, 6, 'BY ANDREW J. BAKER')
+
+        // debug.render()
 
         controller.draw()
       },
