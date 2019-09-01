@@ -8,6 +8,7 @@ import {
   TILE_WIDTH
 } from './config'
 import { c, palette } from './palette'
+import { makeTileSprite } from './tile'
 
 function initTileEngine (cb) {
   const canvas = document.createElement('canvas')
@@ -20,10 +21,28 @@ function initTileEngine (cb) {
   context.fillStyle = palette[c.black]
   context.fillRect(0, 0, canvas.width, canvas.height)
 
+  const tile = makeTileSprite({ context })
+
   for (let y = 0; y < 4; ++y) {
     for (let x = 0; x < 4; ++x) {
-      context.fillStyle = palette[y * 4 + x]
-      context.fillRect(x * TILE_WIDTH, y * TILE_HEIGHT, TILE_WIDTH, TILE_HEIGHT)
+      tile.color = palette[y * 4 + x]
+
+      if (tile.color === palette[c.blue]) {
+        tile.bkcolor = palette[c['bright-blue']]
+      } else if (tile.color === palette[c['bright-blue']]) {
+        tile.bkcolor = palette[c.blue]
+      } else if (tile.color === palette[c['bright-green']]) {
+        tile.bkcolor = palette[c.green]
+      } else if (tile.color === palette[c['bright-yellow']]) {
+        tile.bkcolor = palette[c.brown]
+      } else {
+        tile.bkcolor = palette[c.black]
+      }
+
+      tile.x = x * TILE_WIDTH
+      tile.y = y * TILE_HEIGHT
+
+      tile.render()
     }
   }
 

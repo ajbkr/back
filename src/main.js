@@ -62,17 +62,18 @@ function main () {
 
         player.render()
 
-        //font.render()
-        /* font.x = font.y = 0
+        // font.render()
+
         font.outputText('BACK TO THE ISLAND')
-        font.y = 6
-        font.outputText('BY ANDREW J. BAKER') */
+
+        /*
         font.x = 4
         font.y = 6
         font.outputText('I HAD NO INTENTION, NONE WHATSOEVER, OF GOING BACK...')
         font.x = 188
         font.y = 18
         font.outputText('BACK TO THE ISLAND.')
+        */
         /*
         font.y = 18
         font.outputText('AND YET HERE I FIND MYSELF AS I STEP FROM THE GANGPLANK')

@@ -1,4 +1,5 @@
 import htmlBundle from 'rollup-plugin-html-bundle'
+import livereload from 'rollup-plugin-livereload'
 import nodeResolve from 'rollup-plugin-node-resolve'
 import serve from 'rollup-plugin-serve'
 import { terser } from 'rollup-plugin-terser'
@@ -37,7 +38,8 @@ export default {
     htmlBundle({
       inline: true
     }),
-    !production && serve('dist')
+    !production && serve('dist'),
+    !production && livereload()
   ],
   watch: {
     exclude: ['node_modules/**']
