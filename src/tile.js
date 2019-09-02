@@ -6,6 +6,8 @@ import {
 } from './config'
 import { c, palette } from './palette'
 
+const radiuses = [0.5, 1, 2, 4]
+
 function fillCircle (x, y, radius, color) {
   const { context } = this
 
@@ -26,16 +28,18 @@ function makeTileSprite (options) {
     y: 0,
 
     bkcolor: palette[c.black],
-    color: palette[c['bright-white']],
+
+    circles: [],
 
     render () {
-      const { bkcolor, color, context, height, width } = this
+      const { bkcolor, context, height, width } = this
 
       context.fillStyle = bkcolor
       context.fillRect(this.x, this.y, width, height)
 
       const offset = width / N / 2
 
+      /*
       const radius = width / N / 2
 
       for (let y = 0; y < N; ++y) {
@@ -44,6 +48,16 @@ function makeTileSprite (options) {
             offset + this.y + y * (height / N), radius, color)
         }
       }
+      */
+      this.circles.forEach(circle => {
+        const radius = offset * radiuses[circle.radius]
+
+        const cx = (circle.x + N / 2) * (width / N)
+        const cy = (circle.y + N / 2) * (height / N)
+
+        fillCircle.call(this, offset + this.x + cx, offset + this.y + cy,
+          radius, circle.color)
+      })
     },
 
     ...options

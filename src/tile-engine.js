@@ -9,6 +9,7 @@ import {
 } from './config'
 import { c, palette } from './palette'
 import { makeTileSprite } from './tile'
+import { tiles } from './tiles'
 
 function initTileEngine (cb) {
   const canvas = document.createElement('canvas')
@@ -25,6 +26,7 @@ function initTileEngine (cb) {
 
   for (let y = 0; y < 4; ++y) {
     for (let x = 0; x < 4; ++x) {
+      /*
       tile.color = palette[y * 4 + x]
 
       if (tile.color === palette[c.blue]) {
@@ -38,6 +40,11 @@ function initTileEngine (cb) {
       } else {
         tile.bkcolor = palette[c.black]
       }
+      */
+      tile.bkcolor = tiles[y * 4 + x].bkcolor
+
+      tile.circles = typeof tiles[y * 4 + x].circles !== 'undefined'
+        ? tiles[y * 4 + x].circles : []
 
       tile.x = x * TILE_WIDTH
       tile.y = y * TILE_HEIGHT
