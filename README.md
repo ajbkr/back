@@ -35,3 +35,4 @@ Screenshots
 ![Rudimentary 4x6 bitmap font](screenshots/006.png "Rudimentary 4x6 bitmap font")
 ![Initial circle- or dot-based tile rendering](screenshots/007.png "Initial circle- or dot-based tile rendering")
 ![Further circle-rendering](screenshots/008.png "Further circle-rendering")
+![Sand tile](screenshots/009.png "Sand tile")
