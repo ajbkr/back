@@ -28,12 +28,8 @@ canvas.height = SCREEN_HEIGHT
 
 let player
 
-let tileEngine
-
 function main () {
-  initTileEngine(tileEngine2 => {
-    tileEngine = tileEngine2
-
+  initTileEngine(tileEngine => {
     const font = makeFontSprite()
 
     const debug = makeDebugSprite(context)

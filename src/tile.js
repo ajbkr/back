@@ -8,9 +8,7 @@ import { c, palette } from './palette'
 
 const radiuses = [0.5, 1, 2, 4]
 
-function fillCircle (x, y, radius, color) {
-  const { context } = this
-
+function fillCircle (context, x, y, radius, color) {
   context.fillStyle = color
   context.beginPath()
   context.arc(x, y, radius, 0, 2 * Math.PI)
@@ -19,6 +17,13 @@ function fillCircle (x, y, radius, color) {
 
 function makeTileSprite (options) {
   const N = 8
+
+  const canvas2 = document.createElement('canvas')
+
+  canvas2.width = TILE_WIDTH
+  canvas2.height = TILE_HEIGHT
+
+  const context2 = canvas2.getContext('2d')
 
   return Sprite({
     width: TILE_WIDTH,
@@ -34,30 +39,21 @@ function makeTileSprite (options) {
     render () {
       const { bkcolor, context, height, width } = this
 
-      context.fillStyle = bkcolor
-      context.fillRect(this.x, this.y, width, height)
+      context2.fillStyle = bkcolor
+      context2.fillRect(0, 0, width, height)
 
       const offset = width / N / 2
 
-      /*
-      const radius = width / N / 2
-
-      for (let y = 0; y < N; ++y) {
-        for (let x = 0; x < N; ++x) {
-          fillCircle.call(this, offset + this.x + x * (width / N),
-            offset + this.y + y * (height / N), radius, color)
-        }
-      }
-      */
       this.circles.forEach(circle => {
         const radius = offset * radiuses[circle.radius]
 
         const cx = (circle.x + N / 2) * (width / N)
         const cy = (circle.y + N / 2) * (height / N)
 
-        fillCircle.call(this, offset + this.x + cx, offset + this.y + cy,
-          radius, circle.color)
+        fillCircle(context2, offset + cx, offset + cy, radius, circle.color)
       })
+
+      context.drawImage(canvas2, this.x, this.y)
     },
 
     ...options

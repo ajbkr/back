@@ -10,96 +10,644 @@ import { c, palette } from './palette'
 // ????: ?
 const tiles = [
   {
-    bkcolor: palette[0]
+    bkcolor: palette[c.black]
   },
   {
-    bkcolor: palette[1],
+    bkcolor: palette[c.blue]
+  },
+  {
+    bkcolor: palette[c.green]
+  },
+  {
+    bkcolor: palette[c.cyan]
+  },
+  {
+    bkcolor: palette[c.red]
+  },
+  {
+    bkcolor: palette[c.magenta]
+  },
+  {
+    bkcolor: palette[c.brown]
+  },
+  {
+    bkcolor: palette[c.white]
+  },
+  {
+    bkcolor: palette[c['dark-gray']]
+  },
+  {
+    bkcolor: palette[c['bright-blue']]
+  },
+  {
+    bkcolor: palette[c['bright-green']]
+  },
+  {
+    bkcolor: palette[c['bright-cyan']]
+  },
+  {
+    bkcolor: palette[c['bright-red']]
+  },
+  {
+    bkcolor: palette[c['bright-magenta']]
+  },
+  {
+    bkcolor: palette[c['bright-yellow']]
+  },
+  {
+    bkcolor: palette[c['bright-white']]
+  },
+  { // sand, top-left
+    bkcolor: palette[14],
     circles: [
       {
         x: -4,
-        y: -1,
-        radius: 1,
-        color: palette[c.white]
+        y: -4,
+        radius: 2,
+        color: palette[c.brown]
       },
       {
         x: -3,
-        y: 0,
-        radius: 1,
-        color: palette[c.white]
+        y: -4,
+        radius: 2,
+        color: palette[c.brown]
       },
       {
         x: -2,
-        y: -1,
-        radius: 1,
-        color: palette[c.white]
+        y: -4,
+        radius: 2,
+        color: palette[c.brown]
       },
       {
         x: -1,
-        y: 0,
-        radius: 1,
-        color: palette[c.white]
+        y: -4,
+        radius: 2,
+        color: palette[c.brown]
       },
       {
         x: 0,
-        y: -1,
-        radius: 1,
-        color: palette[c.white]
+        y: -4,
+        radius: 2,
+        color: palette[c.brown]
       },
       {
         x: 1,
-        y: 0,
-        radius: 1,
-        color: palette[c.white]
+        y: -4,
+        radius: 2,
+        color: palette[c.brown]
       },
       {
         x: 2,
+        y: -4,
+        radius: 2,
+        color: palette[c.brown]
+      },
+      {
+        x: 3,
+        y: -4,
+        radius: 2,
+        color: palette[c.brown]
+      },
+      {
+        x: -4,
+        y: -3,
+        radius: 2,
+        color: palette[c.brown]
+      },
+      {
+        x: -4,
+        y: -2,
+        radius: 2,
+        color: palette[c.brown]
+      },
+      {
+        x: -4,
         y: -1,
-        radius: 1,
-        color: palette[c.white]
+        radius: 2,
+        color: palette[c.brown]
+      },
+      {
+        x: -4,
+        y: 0,
+        radius: 2,
+        color: palette[c.brown]
+      },
+      {
+        x: -4,
+        y: 1,
+        radius: 2,
+        color: palette[c.brown]
+      },
+      {
+        x: -4,
+        y: 2,
+        radius: 2,
+        color: palette[c.brown]
+      },
+      {
+        x: -4,
+        y: 3,
+        radius: 2,
+        color: palette[c.brown]
       }
     ]
   },
-  {
-    bkcolor: palette[2]
+  { // sand, top
+    bkcolor: palette[14],
+    circles: [
+      {
+        x: -4,
+        y: -4,
+        radius: 2,
+        color: palette[c.brown]
+      },
+      {
+        x: -3,
+        y: -4,
+        radius: 2,
+        color: palette[c.brown]
+      },
+      {
+        x: -2,
+        y: -4,
+        radius: 2,
+        color: palette[c.brown]
+      },
+      {
+        x: -1,
+        y: -4,
+        radius: 2,
+        color: palette[c.brown]
+      },
+      {
+        x: 0,
+        y: -4,
+        radius: 2,
+        color: palette[c.brown]
+      },
+      {
+        x: 1,
+        y: -4,
+        radius: 2,
+        color: palette[c.brown]
+      },
+      {
+        x: 2,
+        y: -4,
+        radius: 2,
+        color: palette[c.brown]
+      },
+      {
+        x: 3,
+        y: -4,
+        radius: 2,
+        color: palette[c.brown]
+      }
+    ]
   },
-  {
-    bkcolor: palette[3]
+  { // sand, top-right
+    bkcolor: palette[14],
+    circles: [
+      {
+        x: -4,
+        y: -4,
+        radius: 2,
+        color: palette[c.brown]
+      },
+      {
+        x: -3,
+        y: -4,
+        radius: 2,
+        color: palette[c.brown]
+      },
+      {
+        x: -2,
+        y: -4,
+        radius: 2,
+        color: palette[c.brown]
+      },
+      {
+        x: -1,
+        y: -4,
+        radius: 2,
+        color: palette[c.brown]
+      },
+      {
+        x: 0,
+        y: -4,
+        radius: 2,
+        color: palette[c.brown]
+      },
+      {
+        x: 1,
+        y: -4,
+        radius: 2,
+        color: palette[c.brown]
+      },
+      {
+        x: 2,
+        y: -4,
+        radius: 2,
+        color: palette[c.brown]
+      },
+      {
+        x: 3,
+        y: -4,
+        radius: 2,
+        color: palette[c.brown]
+      },
+      {
+        x: 3,
+        y: -3,
+        radius: 2,
+        color: palette[c.brown]
+      },
+      {
+        x: 3,
+        y: -2,
+        radius: 2,
+        color: palette[c.brown]
+      },
+      {
+        x: 3,
+        y: -1,
+        radius: 2,
+        color: palette[c.brown]
+      },
+      {
+        x: 3,
+        y: 0,
+        radius: 2,
+        color: palette[c.brown]
+      },
+      {
+        x: 3,
+        y: 1,
+        radius: 2,
+        color: palette[c.brown]
+      },
+      {
+        x: 3,
+        y: 2,
+        radius: 2,
+        color: palette[c.brown]
+      },
+      {
+        x: 3,
+        y: 3,
+        radius: 2,
+        color: palette[c.brown]
+      }
+    ]
   },
-  {
-    bkcolor: palette[4]
+  { // sand, left
+    bkcolor: palette[14],
+    circles: [
+      {
+        x: -4,
+        y: -4,
+        radius: 2,
+        color: palette[c.brown]
+      },
+      {
+        x: -4,
+        y: -3,
+        radius: 2,
+        color: palette[c.brown]
+      },
+      {
+        x: -4,
+        y: -2,
+        radius: 2,
+        color: palette[c.brown]
+      },
+      {
+        x: -4,
+        y: -1,
+        radius: 2,
+        color: palette[c.brown]
+      },
+      {
+        x: -4,
+        y: 0,
+        radius: 2,
+        color: palette[c.brown]
+      },
+      {
+        x: -4,
+        y: 1,
+        radius: 2,
+        color: palette[c.brown]
+      },
+      {
+        x: -4,
+        y: 2,
+        radius: 2,
+        color: palette[c.brown]
+      },
+      {
+        x: -4,
+        y: 3,
+        radius: 2,
+        color: palette[c.brown]
+      }
+    ]
   },
-  {
-    bkcolor: palette[5]
+  { // sand, right
+    bkcolor: palette[14],
+    circles: [
+      {
+        x: 3,
+        y: -4,
+        radius: 2,
+        color: palette[c.brown]
+      },
+      {
+        x: 3,
+        y: -3,
+        radius: 2,
+        color: palette[c.brown]
+      },
+      {
+        x: 3,
+        y: -2,
+        radius: 2,
+        color: palette[c.brown]
+      },
+      {
+        x: 3,
+        y: -1,
+        radius: 2,
+        color: palette[c.brown]
+      },
+      {
+        x: 3,
+        y: 0,
+        radius: 2,
+        color: palette[c.brown]
+      },
+      {
+        x: 3,
+        y: 1,
+        radius: 2,
+        color: palette[c.brown]
+      },
+      {
+        x: 3,
+        y: 2,
+        radius: 2,
+        color: palette[c.brown]
+      },
+      {
+        x: 3,
+        y: 3,
+        radius: 2,
+        color: palette[c.brown]
+      }
+    ]
   },
-  {
-    bkcolor: palette[6]
+  { // sand, bottom-left
+    bkcolor: palette[14],
+    circles: [
+      {
+        x: -4,
+        y: -4,
+        radius: 2,
+        color: palette[c.brown]
+      },
+      {
+        x: -4,
+        y: -3,
+        radius: 2,
+        color: palette[c.brown]
+      },
+      {
+        x: -4,
+        y: -2,
+        radius: 2,
+        color: palette[c.brown]
+      },
+      {
+        x: -4,
+        y: -1,
+        radius: 2,
+        color: palette[c.brown]
+      },
+      {
+        x: -4,
+        y: 0,
+        radius: 2,
+        color: palette[c.brown]
+      },
+      {
+        x: -4,
+        y: 1,
+        radius: 2,
+        color: palette[c.brown]
+      },
+      {
+        x: -4,
+        y: 2,
+        radius: 2,
+        color: palette[c.brown]
+      },
+      {
+        x: -4,
+        y: 3,
+        radius: 2,
+        color: palette[c.brown]
+      },
+      {
+        x: -3,
+        y: 3,
+        radius: 2,
+        color: palette[c.brown]
+      },
+      {
+        x: -2,
+        y: 3,
+        radius: 2,
+        color: palette[c.brown]
+      },
+      {
+        x: -1,
+        y: 3,
+        radius: 2,
+        color: palette[c.brown]
+      },
+      {
+        x: 0,
+        y: 3,
+        radius: 2,
+        color: palette[c.brown]
+      },
+      {
+        x: 1,
+        y: 3,
+        radius: 2,
+        color: palette[c.brown]
+      },
+      {
+        x: 2,
+        y: 3,
+        radius: 2,
+        color: palette[c.brown]
+      },
+      {
+        x: 3,
+        y: 3,
+        radius: 2,
+        color: palette[c.brown]
+      }
+    ]
   },
-  {
-    bkcolor: palette[7]
+  { // sand, bottom
+    bkcolor: palette[14],
+    circles: [
+      {
+        x: -4,
+        y: 3,
+        radius: 2,
+        color: palette[c.brown]
+      },
+      {
+        x: -3,
+        y: 3,
+        radius: 2,
+        color: palette[c.brown]
+      },
+      {
+        x: -2,
+        y: 3,
+        radius: 2,
+        color: palette[c.brown]
+      },
+      {
+        x: -1,
+        y: 3,
+        radius: 2,
+        color: palette[c.brown]
+      },
+      {
+        x: 0,
+        y: 3,
+        radius: 2,
+        color: palette[c.brown]
+      },
+      {
+        x: 1,
+        y: 3,
+        radius: 2,
+        color: palette[c.brown]
+      },
+      {
+        x: 2,
+        y: 3,
+        radius: 2,
+        color: palette[c.brown]
+      },
+      {
+        x: 3,
+        y: 3,
+        radius: 2,
+        color: palette[c.brown]
+      }
+    ]
   },
-  {
-    bkcolor: palette[8]
-  },
-  {
-    bkcolor: palette[9]
-  },
-  {
-    bkcolor: palette[10]
-  },
-  {
-    bkcolor: palette[11]
-  },
-  {
-    bkcolor: palette[12]
-  },
-  {
-    bkcolor: palette[13]
-  },
-  {
-    bkcolor: palette[14]
-  },
-  {
-    bkcolor: palette[15]
+  { // sand, bottom-right
+    bkcolor: palette[14],
+    circles: [
+      {
+        x: 3,
+        y: -4,
+        radius: 2,
+        color: palette[c.brown]
+      },
+      {
+        x: 3,
+        y: -3,
+        radius: 2,
+        color: palette[c.brown]
+      },
+      {
+        x: 3,
+        y: -2,
+        radius: 2,
+        color: palette[c.brown]
+      },
+      {
+        x: 3,
+        y: -1,
+        radius: 2,
+        color: palette[c.brown]
+      },
+      {
+        x: 3,
+        y: 0,
+        radius: 2,
+        color: palette[c.brown]
+      },
+      {
+        x: 3,
+        y: 1,
+        radius: 2,
+        color: palette[c.brown]
+      },
+      {
+        x: 3,
+        y: 2,
+        radius: 2,
+        color: palette[c.brown]
+      },
+      {
+        x: -4,
+        y: 3,
+        radius: 2,
+        color: palette[c.brown]
+      },
+      {
+        x: -3,
+        y: 3,
+        radius: 2,
+        color: palette[c.brown]
+      },
+      {
+        x: -2,
+        y: 3,
+        radius: 2,
+        color: palette[c.brown]
+      },
+      {
+        x: -1,
+        y: 3,
+        radius: 2,
+        color: palette[c.brown]
+      },
+      {
+        x: 0,
+        y: 3,
+        radius: 2,
+        color: palette[c.brown]
+      },
+      {
+        x: 1,
+        y: 3,
+        radius: 2,
+        color: palette[c.brown]
+      },
+      {
+        x: 2,
+        y: 3,
+        radius: 2,
+        color: palette[c.brown]
+      },
+      {
+        x: 3,
+        y: 3,
+        radius: 2,
+        color: palette[c.brown]
+      }
+    ]
   }
 ]
 
