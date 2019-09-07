@@ -8,7 +8,8 @@
     "build": "rollup -c",
     "dev": "rollup -c -w",
     "install": "napa KilledByAPixel/ZzFX#v1.05:zzfx",
-    "lint": "standard rollup.config.js 'src/**/*.js'",
+    "lint": "standard make-collision.js rollup.config.js 'src/**/*.js'",
+    "make-collision": "node make-collision.js > src/collision.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "zip": "cd dist && zip ../back.zip index.html && advzip -z4 -i50 ../back.zip"
   },
@@ -24,7 +25,9 @@
     "virtual-stick": "^1.0.6"
   },
   "devDependencies": {
+    "cave-automata-2d": "^0.3.1",
     "napa": "^3.0.0",
+    "ndarray": "^1.0.18",
     "rollup": "^1.20.3",
     "rollup-plugin-html-bundle": "0.0.3",
     "rollup-plugin-livereload": "^1.0.1",

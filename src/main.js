@@ -7,7 +7,9 @@ import {
 
 import {
   SCREEN_HEIGHT,
-  SCREEN_WIDTH
+  SCREEN_WIDTH,
+  TILE_HEIGHT,
+  TILE_WIDTH
 } from './config'
 import { makeDebugSprite } from './debug'
 import { makeFontSprite } from './font'
@@ -26,15 +28,15 @@ canvas.height = SCREEN_HEIGHT
 
 // const pal = makePaletteSprite(context)
 
-let player
-
 function main () {
   initTileEngine(tileEngine => {
     const font = makeFontSprite()
 
     const debug = makeDebugSprite(context)
 
-    player = makePlayerSprite(context, tileEngine)
+    const player = makePlayerSprite(context, tileEngine)
+    player.x = TILE_WIDTH * 10
+    player.y = TILE_HEIGHT * 7
 
     const resizeCanvas = makeResizeCanvas(canvas)
 

@@ -14,8 +14,8 @@ function makePlayerSprite (context, tileEngine) {
     width: TILE_WIDTH / 4 * 3,
     height: TILE_HEIGHT / 4 * 3,
 
-    x: TILE_WIDTH * 7,
-    y: TILE_HEIGHT / 2,
+    x: 0,
+    y: 0,
 
     render () {
       context.fillStyle = palette[c.red]
