@@ -30,7 +30,7 @@
     "cave-automata-2d": "^0.3.1",
     "napa": "^3.0.0",
     "ndarray": "^1.0.18",
-    "rollup": "^1.20.3",
+    "rollup": "^1.21.0",
     "rollup-plugin-html-bundle": "0.0.3",
     "rollup-plugin-livereload": "^1.0.1",
     "rollup-plugin-node-resolve": "^5.2.0",
