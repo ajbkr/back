@@ -10,6 +10,7 @@ import {
   TILE_SHEET_WIDTH,
   TILE_WIDTH
 } from './config'
+import { ground as groundData } from './ground'
 import { c, palette } from './palette'
 import { makeTileSprite } from './tile'
 import { tiles } from './tiles'
@@ -61,9 +62,7 @@ function initTileEngine (cb) {
       }],
 
       layers: [{
-        data: [
-          ...collisionData.map(tile => [c['bright-green'] + 1, c.blue + 1][tile])
-        ],
+        data: groundData.map(tile => tile + 1),
         name: 'ground'
       }, {
         data: collisionData,
