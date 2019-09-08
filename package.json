@@ -10,6 +10,7 @@
     "install": "napa KilledByAPixel/ZzFX#v1.05:zzfx",
     "lint": "standard make-collision.js rollup.config.js 'src/**/*.js'",
     "make-collision": "node make-collision.js > src/collision.js",
+    "make-ground": "node make-ground.js > src/ground.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "zip": "cd dist && zip ../back.zip index.html && advzip -z4 -i50 ../back.zip"
   },
@@ -25,6 +26,7 @@
     "virtual-stick": "^1.0.6"
   },
   "devDependencies": {
+    "autotile": "^1.1.0",
     "cave-automata-2d": "^0.3.1",
     "napa": "^3.0.0",
     "ndarray": "^1.0.18",
