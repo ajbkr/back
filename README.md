@@ -19,8 +19,9 @@ Dependencies
 
 Back to the Island makes use of the following libraries/tools:
 
-* [Kontra](https://straker.github.io/kontra/)
+* [autotile](https://www.npmjs.com/package/autotile)
 * [cave-automata-2d](https://www.npmjs.com/package/cave-automata-2d)
+* [Kontra](https://straker.github.io/kontra/)
 * [Virtual Stick](https://www.npmjs.com/package/virtual-stick)
 * [ZzFX](http://www.3d2k.com/js/zzfx/)
 
