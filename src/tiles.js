@@ -159,7 +159,7 @@ const tiles = [
       {
         x: 3,
         y: 3,
-        radius: 2,
+        radius: 0,
         color: palette[c.brown]
       }
     ]
@@ -218,7 +218,7 @@ const tiles = [
       {
         x: -4,
         y: 3,
-        radius: 2,
+        radius: 0,
         color: palette[c.brown]
       },
       {
@@ -467,7 +467,7 @@ const tiles = [
       {
         x: 3,
         y: -4,
-        radius: 2,
+        radius: 0,
         color: palette[c.brown]
       },
       {
@@ -599,7 +599,7 @@ const tiles = [
       {
         x: -4,
         y: -4,
-        radius: 2,
+        radius: 0,
         color: palette[c.brown]
       },
       {
@@ -846,7 +846,15 @@ const tiles = [
     ]
   },
   { // autotile 46: sand
-    bkcolor: palette[c['bright-yellow']]
+    bkcolor: palette[c['bright-yellow']],
+    circles: [
+      {
+        x: 0,
+        y: 0,
+        radius: 1,
+        color: palette[c.green]
+      }
+    ]
   },
   { // autotile 47
     bkcolor: palette[c['bright-red']]

@@ -43,3 +43,4 @@ Screenshots
 ![Incorporating autotile - step 2](screenshots/012.png "Incorporating autotile - step 2")
 ![Incorporating autotile - step 3](screenshots/013.png "Incorporating autotile - step 3")
 ![Incorporating autotile - step 4 (final)](screenshots/014.png "Incorporating autotile - step 4 (final)")
+![Alternative palette colours](screenshots/015.png "Alternative palette colours")
