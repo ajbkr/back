@@ -105,16 +105,16 @@ function main () {
       },
 
       update () {
-        if (keyPressed('left')) {
+        if (keyPressed('left') || keyPressed('a') || keyPressed('q')) {
           player.moveWest()
         }
-        if (keyPressed('right')) {
+        if (keyPressed('right') || keyPressed('d')) {
           player.moveEast()
         }
-        if (keyPressed('up')) {
+        if (keyPressed('up') || keyPressed('w') || keyPressed('z')) {
           player.moveNorth()
         }
-        if (keyPressed('down')) {
+        if (keyPressed('down') || keyPressed('s')) {
           player.moveSouth()
         }
 

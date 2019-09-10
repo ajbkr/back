@@ -45,3 +45,4 @@ Screenshots
 ![Incorporating autotile - step 4 (final)](screenshots/014.png "Incorporating autotile - step 4 (final)")
 ![Alternative palette colours](screenshots/015.png "Alternative palette colours")
 ![Seeded PRNG for island creation](screenshots/016.png "Seeded PRNG for island creation")
+![Eyes](screenshots/017.png "Eyes")
