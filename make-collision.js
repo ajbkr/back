@@ -1,15 +1,27 @@
 const cave = require('cave-automata-2d')
+const fastRandom = require('fast-random')
 const ndarray = require('ndarray')
+const fill = require('ndarray-fill')
 
 const MAP_WIDTH = 20
 const MAP_HEIGHT = 15
 
+const SEED = 12345
+
+const random = fastRandom(SEED).nextFloat
+
+const DENSITY = 0.5
+
 const grid = ndarray(new Array(MAP_WIDTH * MAP_HEIGHT), [MAP_WIDTH, MAP_HEIGHT])
 
+fill(grid, (x, y) => random() <= DENSITY || (
+  x <= 1 || x >= MAP_WIDTH - 2 ||
+  y <= 1 || y >= MAP_HEIGHT - 2
+) ? 1 : 0)
+
 cave(grid, {
-  border: 1,
-  density: 0.5,
-  fill: true
+  density: DENSITY,
+  fill: false
 })(5)
 
 for (let x = 0; x < MAP_WIDTH; ++x) {

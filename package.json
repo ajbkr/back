@@ -7,7 +7,7 @@
   "scripts": {
     "build": "rollup -c",
     "dev": "rollup -c -w",
-    "install": "napa KilledByAPixel/ZzFX#v1.05:zzfx",
+    "postinstall": "napa KilledByAPixel/ZzFX#v1.05:zzfx",
     "lint": "standard make-collision.js make-ground.js rollup.config.js 'src/**/*.js'",
     "make-collision": "node make-collision.js > src/collision.js",
     "make-ground": "node make-ground.js > src/ground.js",
@@ -28,8 +28,10 @@
   "devDependencies": {
     "autotile": "^1.1.0",
     "cave-automata-2d": "^0.3.1",
+    "fast-random": "^2.0.4",
     "napa": "^3.0.0",
     "ndarray": "^1.0.18",
+    "ndarray-fill": "^1.0.2",
     "rollup": "^1.21.0",
     "rollup-plugin-html-bundle": "0.0.3",
     "rollup-plugin-livereload": "^1.0.1",

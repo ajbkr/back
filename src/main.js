@@ -36,7 +36,7 @@ function main () {
 
     const player = makePlayerSprite(context, tileEngine)
     player.x = TILE_WIDTH * 10
-    player.y = TILE_HEIGHT * 7
+    player.y = TILE_HEIGHT * 8.5
 
     const resizeCanvas = makeResizeCanvas(canvas)
 

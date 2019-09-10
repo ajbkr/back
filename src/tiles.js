@@ -60,8 +60,142 @@ const tiles = [
   { // autotile 0: sea
     bkcolor: palette[c.blue]
   },
-  { // autotile 1
-    bkcolor: palette[c['bright-red']]
+  { // autotile 1: wet sand, cul-de-sac bottom
+    bkcolor: palette[c['bright-yellow']],
+    circles: [
+      {
+        x: -4,
+        y: -4,
+        radius: 2,
+        color: palette[c.brown]
+      },
+      {
+        x: 3,
+        y: -4,
+        radius: 2,
+        color: palette[c.brown]
+      },
+      {
+        x: -4,
+        y: -3,
+        radius: 2,
+        color: palette[c.brown]
+      },
+      {
+        x: 3,
+        y: -3,
+        radius: 2,
+        color: palette[c.brown]
+      },
+      {
+        x: -4,
+        y: -2,
+        radius: 2,
+        color: palette[c.brown]
+      },
+      {
+        x: 3,
+        y: -2,
+        radius: 2,
+        color: palette[c.brown]
+      },
+      {
+        x: -4,
+        y: -1,
+        radius: 2,
+        color: palette[c.brown]
+      },
+      {
+        x: 3,
+        y: -1,
+        radius: 2,
+        color: palette[c.brown]
+      },
+      {
+        x: -4,
+        y: 0,
+        radius: 2,
+        color: palette[c.brown]
+      },
+      {
+        x: 3,
+        y: 0,
+        radius: 2,
+        color: palette[c.brown]
+      },
+      {
+        x: -4,
+        y: 1,
+        radius: 2,
+        color: palette[c.brown]
+      },
+      {
+        x: 3,
+        y: 1,
+        radius: 2,
+        color: palette[c.brown]
+      },
+      {
+        x: -4,
+        y: 2,
+        radius: 2,
+        color: palette[c.brown]
+      },
+      {
+        x: 3,
+        y: 2,
+        radius: 2,
+        color: palette[c.brown]
+      },
+      {
+        x: -4,
+        y: 3,
+        radius: 0,
+        color: palette[c.brown]
+      },
+      {
+        x: -3,
+        y: 3,
+        radius: 2,
+        color: palette[c.brown]
+      },
+      {
+        x: -2,
+        y: 3,
+        radius: 2,
+        color: palette[c.brown]
+      },
+      {
+        x: -1,
+        y: 3,
+        radius: 2,
+        color: palette[c.brown]
+      },
+      {
+        x: 0,
+        y: 3,
+        radius: 2,
+        color: palette[c.brown]
+      },
+      {
+        x: 1,
+        y: 3,
+        radius: 2,
+        color: palette[c.brown]
+      },
+      {
+        x: 2,
+        y: 3,
+        radius: 2,
+        color: palette[c.brown]
+      },
+      {
+        x: 3,
+        y: 3,
+        radius: 0,
+        color: palette[c.brown]
+      }
+    ]
   },
   { // autotile 2
     bkcolor: palette[c['bright-red']]
@@ -164,8 +298,142 @@ const tiles = [
       }
     ]
   },
-  { // autotile 5
-    bkcolor: palette[c['bright-red']]
+  { // autotile 5: wet sand, cul-de-sac left
+    bkcolor: palette[c['bright-yellow']],
+    circles: [
+      {
+        x: -4,
+        y: -4,
+        radius: 0,
+        color: palette[c.brown]
+      },
+      {
+        x: -3,
+        y: -4,
+        radius: 2,
+        color: palette[c.brown]
+      },
+      {
+        x: -2,
+        y: -4,
+        radius: 2,
+        color: palette[c.brown]
+      },
+      {
+        x: -1,
+        y: -4,
+        radius: 2,
+        color: palette[c.brown]
+      },
+      {
+        x: 0,
+        y: -4,
+        radius: 2,
+        color: palette[c.brown]
+      },
+      {
+        x: 1,
+        y: -4,
+        radius: 2,
+        color: palette[c.brown]
+      },
+      {
+        x: 2,
+        y: -4,
+        radius: 2,
+        color: palette[c.brown]
+      },
+      {
+        x: 3,
+        y: -4,
+        radius: 2,
+        color: palette[c.brown]
+      },
+      {
+        x: -4,
+        y: -3,
+        radius: 2,
+        color: palette[c.brown]
+      },
+      {
+        x: -4,
+        y: -2,
+        radius: 2,
+        color: palette[c.brown]
+      },
+      {
+        x: -4,
+        y: -1,
+        radius: 2,
+        color: palette[c.brown]
+      },
+      {
+        x: -4,
+        y: 0,
+        radius: 2,
+        color: palette[c.brown]
+      },
+      {
+        x: -4,
+        y: 1,
+        radius: 2,
+        color: palette[c.brown]
+      },
+      {
+        x: -4,
+        y: 2,
+        radius: 2,
+        color: palette[c.brown]
+      },
+      {
+        x: -4,
+        y: 3,
+        radius: 0,
+        color: palette[c.brown]
+      },
+      {
+        x: -3,
+        y: 3,
+        radius: 2,
+        color: palette[c.brown]
+      },
+      {
+        x: -2,
+        y: 3,
+        radius: 2,
+        color: palette[c.brown]
+      },
+      {
+        x: -1,
+        y: 3,
+        radius: 2,
+        color: palette[c.brown]
+      },
+      {
+        x: 0,
+        y: 3,
+        radius: 2,
+        color: palette[c.brown]
+      },
+      {
+        x: 1,
+        y: 3,
+        radius: 2,
+        color: palette[c.brown]
+      },
+      {
+        x: 2,
+        y: 3,
+        radius: 2,
+        color: palette[c.brown]
+      },
+      {
+        x: 3,
+        y: 3,
+        radius: 2,
+        color: palette[c.brown]
+      }
+    ]
   },
   { // autotile 6
     bkcolor: palette[c['bright-red']]
@@ -330,8 +598,142 @@ const tiles = [
       }
     ]
   },
-  { // autotile 13
-    bkcolor: palette[c['bright-red']]
+  { // autotile 13: wet sand, cul-de-sac top
+    bkcolor: palette[c['bright-yellow']],
+    circles: [
+      {
+        x: -4,
+        y: -4,
+        radius: 0,
+        color: palette[c.brown]
+      },
+      {
+        x: -3,
+        y: -4,
+        radius: 2,
+        color: palette[c.brown]
+      },
+      {
+        x: -2,
+        y: -4,
+        radius: 2,
+        color: palette[c.brown]
+      },
+      {
+        x: -1,
+        y: -4,
+        radius: 2,
+        color: palette[c.brown]
+      },
+      {
+        x: 0,
+        y: -4,
+        radius: 2,
+        color: palette[c.brown]
+      },
+      {
+        x: 1,
+        y: -4,
+        radius: 2,
+        color: palette[c.brown]
+      },
+      {
+        x: 2,
+        y: -4,
+        radius: 2,
+        color: palette[c.brown]
+      },
+      {
+        x: 3,
+        y: -4,
+        radius: 0,
+        color: palette[c.brown]
+      },
+      {
+        x: -4,
+        y: -3,
+        radius: 2,
+        color: palette[c.brown]
+      },
+      {
+        x: 3,
+        y: -3,
+        radius: 2,
+        color: palette[c.brown]
+      },
+      {
+        x: -4,
+        y: -2,
+        radius: 2,
+        color: palette[c.brown]
+      },
+      {
+        x: 3,
+        y: -2,
+        radius: 2,
+        color: palette[c.brown]
+      },
+      {
+        x: -4,
+        y: -1,
+        radius: 2,
+        color: palette[c.brown]
+      },
+      {
+        x: 3,
+        y: -1,
+        radius: 2,
+        color: palette[c.brown]
+      },
+      {
+        x: -4,
+        y: 0,
+        radius: 2,
+        color: palette[c.brown]
+      },
+      {
+        x: 3,
+        y: 0,
+        radius: 2,
+        color: palette[c.brown]
+      },
+      {
+        x: -4,
+        y: 1,
+        radius: 2,
+        color: palette[c.brown]
+      },
+      {
+        x: 3,
+        y: 1,
+        radius: 2,
+        color: palette[c.brown]
+      },
+      {
+        x: -4,
+        y: 2,
+        radius: 2,
+        color: palette[c.brown]
+      },
+      {
+        x: 3,
+        y: 2,
+        radius: 2,
+        color: palette[c.brown]
+      },
+      {
+        x: -4,
+        y: 3,
+        radius: 2,
+        color: palette[c.brown]
+      },
+      {
+        x: 3,
+        y: 3,
+        radius: 2,
+        color: palette[c.brown]
+      }
+    ]
   },
   { // autotile 14
     bkcolor: palette[c['bright-red']]
@@ -413,8 +815,28 @@ const tiles = [
   { // autotile 23
     bkcolor: palette[c['bright-red']]
   },
-  { // autotile 24
-    bkcolor: palette[c['bright-red']]
+  { // autotile 24: wet sand, corners top-left, bottom-left, bottom-right
+    bkcolor: palette[c['bright-yellow']],
+    circles: [
+      {
+        x: -4,
+        y: -4,
+        radius: 2,
+        color: palette[c.brown]
+      },
+      {
+        x: -4,
+        y: 3,
+        radius: 2,
+        color: palette[c.brown]
+      },
+      {
+        x: 3,
+        y: 3,
+        radius: 2,
+        color: palette[c.brown]
+      }
+    ]
   },
   { // autotile 25
     bkcolor: palette[c['bright-red']]
