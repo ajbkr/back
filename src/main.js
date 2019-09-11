@@ -12,6 +12,7 @@ import {
   TILE_WIDTH
 } from './config'
 import { makeDebugSprite } from './debug'
+import { makeEnemySprite } from './enemy'
 import { makeFontSprite } from './font'
 // import { c, makePaletteSprite, palette } from './palette'
 import { c, palette } from './palette'
@@ -38,6 +39,10 @@ function main () {
     player.x = TILE_WIDTH * 10
     player.y = TILE_HEIGHT * 8.5
 
+    const enemy = makeEnemySprite(context, tileEngine)
+    enemy.x = TILE_WIDTH * 12
+    enemy.y = TILE_HEIGHT * 9
+
     const resizeCanvas = makeResizeCanvas(canvas)
 
     resizeCanvas()
@@ -57,6 +62,8 @@ function main () {
         tileEngine.renderLayer('ground')
 
         // pal.render()
+
+        enemy.render()
 
         player.render()
 
