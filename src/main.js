@@ -6,8 +6,12 @@ import {
 } from 'kontra'
 
 import {
+  FINISH_TILE,
+  MAP_HEIGHT,
+  MAP_WIDTH,
   SCREEN_HEIGHT,
   SCREEN_WIDTH,
+  START_TILE,
   TILE_HEIGHT,
   TILE_WIDTH
 } from './config'
@@ -19,6 +23,7 @@ import { c, palette } from './palette'
 import { makePlayerSprite } from './player'
 import { makeResizeCanvas } from './resize'
 import { initTileEngine } from './tile-engine'
+import { collision as collisionData } from './collision'
 
 const VirtualStick = exports.VirtualStick // XXX
 
@@ -36,12 +41,33 @@ function main () {
     const debug = makeDebugSprite(context)
 
     const player = makePlayerSprite(context, tileEngine)
-    player.x = TILE_WIDTH * 10
-    player.y = TILE_HEIGHT * 8.5
+    player.x = TILE_WIDTH * 10 + TILE_WIDTH / 8
+    player.y = TILE_HEIGHT * 9.125
 
-    const enemy = makeEnemySprite(context, tileEngine)
-    enemy.x = TILE_WIDTH * 12
-    enemy.y = TILE_HEIGHT * 9
+    const enemies = []
+
+    const numberOfEnemies = Math.floor(collisionData.map(tile => [1, 0][tile])
+      .reduce((sum, tile) => sum + tile) / 13)
+
+    for (let index = 0; index < numberOfEnemies; ++index) {
+      const enemy = makeEnemySprite(context, tileEngine)
+
+      let x, y
+
+      do {
+        x = Math.floor(Math.random() * MAP_WIDTH) * TILE_WIDTH + TILE_WIDTH / 8
+        y = Math.floor(Math.random() * MAP_HEIGHT) * TILE_HEIGHT
+      } while (tileEngine.tileAtLayer('collision', { x, y }) ||
+        tileEngine.tileAtLayer('ground', { x, y }) === START_TILE + 1 ||
+        tileEngine.tileAtLayer('ground', { x, y }) === FINISH_TILE + 1)
+
+      enemy.x = x
+      enemy.y = y
+
+      enemy.dy = Math.random() < 0.5 ? -0.5 : 0.5
+
+      enemies.push(enemy)
+    }
 
     const resizeCanvas = makeResizeCanvas(canvas)
 
@@ -63,7 +89,7 @@ function main () {
 
         // pal.render()
 
-        enemy.render()
+        enemies.forEach(enemy => enemy.render())
 
         player.render()
 
@@ -112,6 +138,27 @@ function main () {
       },
 
       update () {
+        for (let index = 0; index < enemies.length; ++index) {
+          const enemy = enemies[index]
+
+          const { x } = enemy
+          let { dy, y } = enemy
+
+          y += dy
+
+          if (!tileEngine.layerCollidesWith('collision', {
+            x,
+            y,
+            width: enemy.width,
+            height: enemy.height
+          })) {
+            enemies[index].y = y
+          } else {
+            dy *= -1
+            enemies[index].dy = dy
+          }
+        }
+
         if (keyPressed('left') || keyPressed('a') || keyPressed('q')) {
           player.moveWest()
         }

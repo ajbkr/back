@@ -1280,6 +1280,206 @@ const tiles = [
   },
   { // autotile 47
     bkcolor: palette[c['bright-red']]
+  },
+  { // start
+    bkcolor: palette[c['bright-green']]
+  },
+  { // finish
+    bkcolor: palette[c.black],
+    circles: [
+      {
+        x: -3,
+        y: -4,
+        radius: 1,
+        color: palette[c['bright-white']]
+      },
+      {
+        x: -1,
+        y: -4,
+        radius: 1,
+        color: palette[c['bright-white']]
+      },
+      {
+        x: 1,
+        y: -4,
+        radius: 1,
+        color: palette[c['bright-white']]
+      },
+      {
+        x: 3,
+        y: -4,
+        radius: 1,
+        color: palette[c['bright-white']]
+      },
+      {
+        x: -4,
+        y: -3,
+        radius: 1,
+        color: palette[c['bright-white']]
+      },
+      {
+        x: -2,
+        y: -3,
+        radius: 1,
+        color: palette[c['bright-white']]
+      },
+      {
+        x: 0,
+        y: -3,
+        radius: 1,
+        color: palette[c['bright-white']]
+      },
+      {
+        x: 2,
+        y: -3,
+        radius: 1,
+        color: palette[c['bright-white']]
+      },
+      {
+        x: -3,
+        y: -2,
+        radius: 1,
+        color: palette[c['bright-white']]
+      },
+      {
+        x: -1,
+        y: -2,
+        radius: 1,
+        color: palette[c['bright-white']]
+      },
+      {
+        x: 1,
+        y: -2,
+        radius: 1,
+        color: palette[c['bright-white']]
+      },
+      {
+        x: 3,
+        y: -2,
+        radius: 1,
+        color: palette[c['bright-white']]
+      },
+      {
+        x: -4,
+        y: -1,
+        radius: 1,
+        color: palette[c['bright-white']]
+      },
+      {
+        x: -2,
+        y: -1,
+        radius: 1,
+        color: palette[c['bright-white']]
+      },
+      {
+        x: 0,
+        y: -1,
+        radius: 1,
+        color: palette[c['bright-white']]
+      },
+      {
+        x: 2,
+        y: -1,
+        radius: 1,
+        color: palette[c['bright-white']]
+      },
+      {
+        x: -3,
+        y: 0,
+        radius: 1,
+        color: palette[c['bright-white']]
+      },
+      {
+        x: -1,
+        y: 0,
+        radius: 1,
+        color: palette[c['bright-white']]
+      },
+      {
+        x: 1,
+        y: 0,
+        radius: 1,
+        color: palette[c['bright-white']]
+      },
+      {
+        x: 3,
+        y: 0,
+        radius: 1,
+        color: palette[c['bright-white']]
+      },
+      {
+        x: -4,
+        y: 1,
+        radius: 1,
+        color: palette[c['bright-white']]
+      },
+      {
+        x: -2,
+        y: 1,
+        radius: 1,
+        color: palette[c['bright-white']]
+      },
+      {
+        x: 0,
+        y: 1,
+        radius: 1,
+        color: palette[c['bright-white']]
+      },
+      {
+        x: 2,
+        y: 1,
+        radius: 1,
+        color: palette[c['bright-white']]
+      },
+      {
+        x: -3,
+        y: 2,
+        radius: 1,
+        color: palette[c['bright-white']]
+      },
+      {
+        x: -1,
+        y: 2,
+        radius: 1,
+        color: palette[c['bright-white']]
+      },
+      {
+        x: 1,
+        y: 2,
+        radius: 1,
+        color: palette[c['bright-white']]
+      },
+      {
+        x: 3,
+        y: 2,
+        radius: 1,
+        color: palette[c['bright-white']]
+      },
+      {
+        x: -4,
+        y: 3,
+        radius: 1,
+        color: palette[c['bright-white']]
+      },
+      {
+        x: -2,
+        y: 3,
+        radius: 1,
+        color: palette[c['bright-white']]
+      },
+      {
+        x: 0,
+        y: 3,
+        radius: 1,
+        color: palette[c['bright-white']]
+      },
+      {
+        x: 2,
+        y: 3,
+        radius: 1,
+        color: palette[c['bright-white']]
+      }
+    ]
   }
 ]
 

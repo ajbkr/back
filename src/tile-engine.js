@@ -49,6 +49,9 @@ function initTileEngine (cb) {
   const image = new Image()
 
   image.onload = function () {
+    let startTile = 0
+    let finishTile = 0
+
     const tileEngine = TileEngine({
       tileheight: TILE_HEIGHT,
       tilewidth: TILE_WIDTH,
@@ -62,7 +65,12 @@ function initTileEngine (cb) {
       }],
 
       layers: [{
-        data: groundData.map(tile => tile + 1),
+        data: groundData
+          .map(tile => !startTile && tile === 62 ? (startTile = 64) : tile)
+          .reverse()
+          .map(tile => !finishTile && tile === 62 ? (finishTile = 65) : tile)
+          .reverse()
+          .map(tile => tile + 1),
         name: 'ground'
       }, {
         data: collisionData,
