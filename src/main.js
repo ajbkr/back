@@ -75,7 +75,7 @@ const winCondition = (finishTile, player) =>
 function resetEnemies (level, tileEngine, startTile, finishTile, enemies) {
   enemies.length = 0
 
-  const numberOfEnemies = Math.floor(collisions[level].map(tile => [1, 0][tile])
+  const numberOfEnemies = Math.floor(collisions[level % collisions.length].map(tile => [1, 0][tile])
     .reduce((sum, tile) => sum + tile) / 13)
 
   for (let index = 0; index < numberOfEnemies; ++index) {
@@ -127,7 +127,7 @@ function resetTileEngine (level, tileEngine, image) {
     }],
 
     layers: [{
-      data: grounds[level]
+      data: grounds[level % grounds.length]
         .map(tile => !startTile && tile === 62 ? (startTile = 64) : tile)
         .reverse()
         .map(tile => !finishTile && tile === 62 ? (finishTile = 65) : tile)
@@ -135,7 +135,7 @@ function resetTileEngine (level, tileEngine, image) {
         .map(tile => tile + 1),
       name: 'ground'
     }, {
-      data: collisions[level],
+      data: collisions[level % collisions.length],
       name: 'collision'
     }]
   })
@@ -201,7 +201,12 @@ function main () {
 
             // font.render()
 
-            font.outputText('BACK TO THE ISLAND (WORK-IN-PROGRESS)')
+            font.x = 4
+            font.y = 6
+            font.outputText('BACK TO THE ISLAND')
+
+            font.y = 12
+            font.outputText('LEVEL ' + (level + 1))
 
             // debug.render()
 
@@ -301,11 +306,7 @@ function main () {
             } else {
               winFrameCount = 0
 
-              if (level < collisions.length - 1) {
-                ++level
-              } else {
-                level = 0
-              }
+              ++level
 
               tileEngine = resetTileEngine(level, tileEngine, image)
 
