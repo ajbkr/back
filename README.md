@@ -46,3 +46,4 @@ Screenshots
 ![Alternative palette colours](screenshots/015.png "Alternative palette colours")
 ![Seeded PRNG for island creation](screenshots/016.png "Seeded PRNG for island creation")
 ![Eyes](screenshots/017.png "Eyes")
+![Initial enemy](screenshots/018.png "Initial enemy")
