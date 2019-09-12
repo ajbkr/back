@@ -59,7 +59,7 @@ function makePlayerSprite (context, tileEngine) {
       })) {
         this.x = x
       } else {
-        playSound('collision')
+        playSound('sea')
       }
       if (!tileEngine.layerCollidesWith('collision', {
         height,
@@ -95,7 +95,7 @@ function makePlayerSprite (context, tileEngine) {
       })) {
         this.y = y
       } else {
-        playSound('collision')
+        playSound('sea')
       }
       if (!tileEngine.layerCollidesWith('collision', {
         height,
@@ -131,7 +131,7 @@ function makePlayerSprite (context, tileEngine) {
       })) {
         this.y = y
       } else {
-        playSound('collision')
+        playSound('sea')
       }
       if (!tileEngine.layerCollidesWith('collision', {
         height,
@@ -167,7 +167,7 @@ function makePlayerSprite (context, tileEngine) {
       })) {
         this.x = x
       } else {
-        playSound('collision')
+        playSound('sea')
       }
       if (!tileEngine.layerCollidesWith('collision', {
         height,
