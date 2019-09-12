@@ -1478,7 +1478,7 @@ const tiles = [
     bkcolor: palette[c['bright-red']]
   },
   { // start
-    bkcolor: palette[c['bright-green']]
+    bkcolor: palette[c['light-gray']]
   },
   { // finish
     bkcolor: palette[c.black],

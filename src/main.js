@@ -97,7 +97,7 @@ function resetEnemies (level, tileEngine, startTile, finishTile, enemies) {
     enemy.y = y
 
     enemy.dy = Math.random() < 0.5 ? -0.5 : 0.5
-    enemy.dy *= (level + 1)
+    enemy.dy *= ((level + 1) / 3)
 
     enemies.push(enemy)
   }
