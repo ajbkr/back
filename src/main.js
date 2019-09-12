@@ -303,11 +303,14 @@ function main () {
 
               if (level < collisions.length - 1) {
                 ++level
-                tileEngine = resetTileEngine(level, tileEngine, image)
-
-                startTile = calcStartTile(tileEngine)
-                finishTile = calcFinishTile(tileEngine)
+              } else {
+                level = 0
               }
+
+              tileEngine = resetTileEngine(level, tileEngine, image)
+
+              startTile = calcStartTile(tileEngine)
+              finishTile = calcFinishTile(tileEngine)
 
               resetPlayer(startTile, player, tileEngine)
               resetEnemies(level, tileEngine, startTile, finishTile, enemies)

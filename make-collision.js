@@ -6,11 +6,11 @@ const fill = require('ndarray-fill')
 const MAP_WIDTH = 20
 const MAP_HEIGHT = 15
 
-const SEED = 12345
+const SEED = 1234
 
 const random = fastRandom(SEED).nextFloat
 
-const DENSITY = 0.5
+const DENSITY = 0.4
 
 const grid = ndarray(new Array(MAP_WIDTH * MAP_HEIGHT), [MAP_WIDTH, MAP_HEIGHT])
 
