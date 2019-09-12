@@ -17,7 +17,11 @@ function makePlayerSprite (context, tileEngine) {
     x: 0,
     y: 0,
 
+    tileEngine,
+
     render () {
+      const { tileEngine } = this
+
       context.fillStyle = palette[c.red]
       context.fillRect(this.x - tileEngine.sx, this.y - tileEngine.sy, this.width,
         this.height - 3)
@@ -36,6 +40,8 @@ function makePlayerSprite (context, tileEngine) {
     },
 
     moveEast () {
+      const { tileEngine } = this
+
       const { height, width, y } = this
       let { x } = this
 
@@ -72,6 +78,8 @@ function makePlayerSprite (context, tileEngine) {
     },
 
     moveNorth () {
+      const { tileEngine } = this
+
       const { height, width, x } = this
       let { y } = this
 
@@ -108,6 +116,8 @@ function makePlayerSprite (context, tileEngine) {
     },
 
     moveSouth () {
+      const { tileEngine } = this
+
       const { height, width, x } = this
       let { y } = this
 
@@ -144,6 +154,8 @@ function makePlayerSprite (context, tileEngine) {
     },
 
     moveWest () {
+      const { tileEngine } = this
+
       const { height, width, y } = this
       let { x } = this
 

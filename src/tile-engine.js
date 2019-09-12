@@ -1,7 +1,7 @@
 /* global Image */
 import { TileEngine } from 'kontra'
 
-import { collision as collisionData } from './collision'
+import { collisions } from './collisions'
 import {
   MAP_HEIGHT,
   MAP_WIDTH,
@@ -10,7 +10,7 @@ import {
   TILE_SHEET_WIDTH,
   TILE_WIDTH
 } from './config'
-import { ground as groundData } from './ground'
+import { grounds } from './grounds'
 import { c, palette } from './palette'
 import { makeTileSprite } from './tile'
 import { tiles } from './tiles'
@@ -65,7 +65,7 @@ function initTileEngine (cb) {
       }],
 
       layers: [{
-        data: groundData
+        data: grounds[0]
           .map(tile => !startTile && tile === 62 ? (startTile = 64) : tile)
           .reverse()
           .map(tile => !finishTile && tile === 62 ? (finishTile = 65) : tile)
@@ -73,13 +73,13 @@ function initTileEngine (cb) {
           .map(tile => tile + 1),
         name: 'ground'
       }, {
-        data: collisionData,
+        data: collisions[0],
         name: 'collision'
       }]
     })
 
     if (typeof cb === 'function') {
-      cb(tileEngine)
+      cb(tileEngine, image)
     }
   }
 

@@ -2,9 +2,11 @@ import {
   GameLoop,
   init,
   initKeys,
-  keyPressed
+  keyPressed,
+  TileEngine
 } from 'kontra'
 
+import { collisions } from './collisions'
 import {
   FINISH_TILE,
   MAP_HEIGHT,
@@ -18,13 +20,13 @@ import {
 import { makeDebugSprite } from './debug'
 import { makeEnemySprite } from './enemy'
 import { makeFontSprite } from './font'
+import { grounds } from './grounds'
 // import { c, makePaletteSprite, palette } from './palette'
 import { c, palette } from './palette'
 import { makePlayerSprite } from './player'
 import { makeResizeCanvas } from './resize'
 import { playSound } from './sound'
 import { initTileEngine } from './tile-engine'
-import { collision as collisionData } from './collision'
 
 const VirtualStick = exports.VirtualStick // XXX
 
@@ -70,48 +72,93 @@ const winCondition = (finishTile, player) =>
   Math.floor((player.x + player.width / 2) / TILE_WIDTH) === finishTile.x &&
   Math.floor((player.y + player.height / 2) / TILE_HEIGHT) === finishTile.y
 
+function resetEnemies (level, tileEngine, startTile, finishTile, enemies) {
+  enemies.length = 0
+
+  const numberOfEnemies = Math.floor(collisions[level].map(tile => [1, 0][tile])
+    .reduce((sum, tile) => sum + tile) / 13)
+
+  for (let index = 0; index < numberOfEnemies; ++index) {
+    const enemy = makeEnemySprite(context, tileEngine)
+
+    let x, y
+
+    do {
+      x = Math.floor(Math.random() * MAP_WIDTH) * TILE_WIDTH + TILE_WIDTH / 8
+      y = Math.floor(Math.random() * MAP_HEIGHT) * TILE_HEIGHT
+    } while ((tileEngine.tileAtLayer('collision', { x, y }) ||
+      Math.floor(x / TILE_WIDTH) === startTile.x) ||
+      (tileEngine.tileAtLayer('collision', { x, y }) ||
+      Math.floor(x / TILE_WIDTH) === finishTile.x) ||
+      tileEngine.tileAtLayer('ground', { x, y }) === START_TILE + 1 ||
+      tileEngine.tileAtLayer('ground', { x, y }) === FINISH_TILE + 1)
+
+    enemy.x = x
+    enemy.y = y
+
+    enemy.dy = Math.random() < 0.5 ? -0.5 : 0.5
+    enemy.dy *= (level + 1)
+
+    enemies.push(enemy)
+  }
+}
+
+function resetPlayer (startTile, player, tileEngine) {
+  player.tileEngine = tileEngine
+
+  player.x = TILE_WIDTH * startTile.x + TILE_WIDTH / 8
+  player.y = TILE_HEIGHT * (startTile.y + 0.125)
+}
+
+function resetTileEngine (level, tileEngine, image) {
+  let startTile = 0
+  let finishTile = 0
+
+  return TileEngine({
+    tileheight: TILE_HEIGHT,
+    tilewidth: TILE_WIDTH,
+
+    width: MAP_WIDTH,
+    height: MAP_HEIGHT,
+
+    tilesets: [{
+      firstgid: 1,
+      image
+    }],
+
+    layers: [{
+      data: grounds[level]
+        .map(tile => !startTile && tile === 62 ? (startTile = 64) : tile)
+        .reverse()
+        .map(tile => !finishTile && tile === 62 ? (finishTile = 65) : tile)
+        .reverse()
+        .map(tile => tile + 1),
+      name: 'ground'
+    }, {
+      data: collisions[level],
+      name: 'collision'
+    }]
+  })
+}
+
 function main () {
   let state
 
-  initTileEngine(tileEngine => {
+  let level = 0
+
+  initTileEngine((tileEngine, image) => {
     const font = makeFontSprite()
 
     const debug = makeDebugSprite(context)
 
-    const startTile = calcStartTile(tileEngine)
-    const finishTile = calcFinishTile(tileEngine)
+    let startTile = calcStartTile(tileEngine)
+    let finishTile = calcFinishTile(tileEngine)
 
     const player = makePlayerSprite(context, tileEngine)
-    player.x = TILE_WIDTH * startTile.x + TILE_WIDTH / 8
-    player.y = TILE_HEIGHT * (startTile.y + 0.125)
+    resetPlayer(startTile, player, tileEngine)
 
     const enemies = []
-
-    const numberOfEnemies = Math.floor(collisionData.map(tile => [1, 0][tile])
-      .reduce((sum, tile) => sum + tile) / 13)
-
-    for (let index = 0; index < numberOfEnemies; ++index) {
-      const enemy = makeEnemySprite(context, tileEngine)
-
-      let x, y
-
-      do {
-        x = Math.floor(Math.random() * MAP_WIDTH) * TILE_WIDTH + TILE_WIDTH / 8
-        y = Math.floor(Math.random() * MAP_HEIGHT) * TILE_HEIGHT
-      } while ((tileEngine.tileAtLayer('collision', { x, y }) ||
-        Math.floor(x / TILE_WIDTH) === startTile.x) ||
-       (tileEngine.tileAtLayer('collision', { x, y }) ||
-        Math.floor(x / TILE_WIDTH) === finishTile.x) ||
-        tileEngine.tileAtLayer('ground', { x, y }) === START_TILE + 1 ||
-        tileEngine.tileAtLayer('ground', { x, y }) === FINISH_TILE + 1)
-
-      enemy.x = x
-      enemy.y = y
-
-      enemy.dy = Math.random() < 0.5 ? -0.5 : 0.5
-
-      enemies.push(enemy)
-    }
+    resetEnemies(level, tileEngine, startTile, finishTile, enemies)
 
     const resizeCanvas = makeResizeCanvas(canvas)
 
@@ -156,41 +203,6 @@ function main () {
 
             font.outputText('BACK TO THE ISLAND (WORK-IN-PROGRESS)')
 
-            /*
-            font.x = 4
-            font.y = 6
-            font.outputText('I HAD NO INTENTION, NONE WHATSOEVER, OF GOING BACK...')
-            font.x = 188
-            font.y = 18
-            font.outputText('BACK TO THE ISLAND.')
-            */
-            /*
-            font.y = 18
-            font.outputText('AND YET HERE I FIND MYSELF AS I STEP FROM THE GANGPLANK')
-            font.y = 24
-            font.outputText('OF A CALMAC FERRY, BEFORE PICKING MY WAY DEFTLY THROUGH THE')
-            font.y = 30
-            font.outputText('CROWDS OF ARRIVING TOURISTS. I AM REVISITING THAT LARGEST AND MOST')
-            font.y = 36
-            font.outputText('NORTHERLY MEMBER OF THE HEBRIDEAN ARCHIPELAGO,')
-            font.y = 42
-            font.outputText('THE ISLE OF LEWIS.')
-
-            font.y = 54
-            font.outputText('MY NAME IS MEL KNOX. I AM WELL-VERSED IN THE ARCANE ARTS.')
-            font.y = 60
-            font.outputText('I AM A SENTINEL')
-            font.y = 66
-            font.outputText('AND I AM HERE TO RELUCTANTLY RESUME MY INVESTIGATION')
-            font.y = 72
-            font.outputText('INTO THE DOINGS AND SHADOWY DEALINGS OF "THE ESOTERIC ORDER OF DAGON".')
-
-            font.y = 84
-            font.outputText('I CAUTIOUSLY EXIT THE FERRY PORT AT STORNOWAY HARBOUR AND HEAD DIRECTLY')
-            font.y = 90
-            font.outputText('FOR THE TAXI RANK.')
-            */
-
             // debug.render()
 
             controller.draw()
@@ -205,7 +217,6 @@ function main () {
       },
 
       update () {
-        console.log(state)
         switch (state) {
           case 'lose': {
             if (loseFrameCount < 60) {
@@ -213,8 +224,7 @@ function main () {
             } else {
               loseFrameCount = 0
 
-              player.x = TILE_WIDTH * startTile.x + TILE_WIDTH / 8
-              player.y = TILE_HEIGHT * (startTile.y + 0.125)
+              resetPlayer(startTile, player, tileEngine)
 
               playSound('start')
 
@@ -291,8 +301,16 @@ function main () {
             } else {
               winFrameCount = 0
 
-              player.x = TILE_WIDTH * startTile.x + TILE_WIDTH / 8
-              player.y = TILE_HEIGHT * (startTile.y + 0.125)
+              if (level < collisions.length - 1) {
+                ++level
+                tileEngine = resetTileEngine(level, tileEngine, image)
+
+                startTile = calcStartTile(tileEngine)
+                finishTile = calcFinishTile(tileEngine)
+              }
+
+              resetPlayer(startTile, player, tileEngine)
+              resetEnemies(level, tileEngine, startTile, finishTile, enemies)
 
               playSound('start')
 
