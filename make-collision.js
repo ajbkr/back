@@ -6,7 +6,7 @@ const fill = require('ndarray-fill')
 const MAP_WIDTH = 20
 const MAP_HEIGHT = 15
 
-const SEED = 1234
+const SEED = 12
 
 const random = fastRandom(SEED).nextFloat
 
