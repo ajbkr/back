@@ -27,7 +27,11 @@ import { c, palette } from './palette'
 import { makePlayerSprite } from './player'
 import { makeResizeCanvas } from './resize'
 import { playSound } from './sound'
-import { initTileEngine } from './tile-engine'
+import {
+  calcFinishTile,
+  calcStartTile,
+  initTileEngine
+} from './tile-engine'
 
 const VirtualStick = exports.VirtualStick // XXX
 
@@ -38,32 +42,6 @@ canvas.height = SCREEN_HEIGHT
 
 // const pal = makePaletteSprite(context)
 
-function calcFinishTile ({ tileEngine }) {
-  for (let y = 0; y < MAP_HEIGHT; ++y) {
-    for (let x = 0; x < MAP_WIDTH; ++x) {
-      if (tileEngine.tileAtLayer('ground', {
-        x: x * TILE_WIDTH,
-        y: y * TILE_HEIGHT
-      }) === FINISH_TILE + 1) {
-        return { x, y }
-      }
-    }
-  }
-}
-
-function calcStartTile ({ tileEngine }) {
-  for (let y = 0; y < MAP_HEIGHT; ++y) {
-    for (let x = 0; x < MAP_WIDTH; ++x) {
-      if (tileEngine.tileAtLayer('ground', {
-        x: x * TILE_WIDTH,
-        y: y * TILE_HEIGHT
-      }) === START_TILE + 1) {
-        return { x, y }
-      }
-    }
-  }
-}
-
 const loseCondition = ({ enemies, player }) => !!enemies.filter(enemy =>
   Math.abs(enemy.x - player.x) < player.width &&
   Math.abs(enemy.y - player.y) < player.height
@@ -73,10 +51,11 @@ const winCondition = ({ finishTile, player }) =>
   Math.floor((player.x + player.width / 2) / TILE_WIDTH) === finishTile.x &&
   Math.floor((player.y + player.height / 2) / TILE_HEIGHT) === finishTile.y
 
-function resetEnemies (level, tileEngine, startTile, finishTile, enemies) {
+function resetEnemies ({ enemies, finishTile, level, startTile, tileEngine }) {
   enemies.length = 0
 
-  const numberOfEnemies = Math.floor(collisions[level % collisions.length].map(tile => [1, 0][tile])
+  const numberOfEnemies = Math.floor(collisions[level % collisions.length]
+    .map(tile => [1, 0][tile])
     .reduce((sum, tile) => sum + tile) / 13)
 
   for (let index = 0; index < numberOfEnemies; ++index) {
@@ -156,14 +135,10 @@ function main () {
     let finishTile = calcFinishTile({ tileEngine })
 
     const player = makePlayerSprite(context, tileEngine)
-    resetPlayer({
-      player,
-      startTile,
-      tileEngine
-    })
+    resetPlayer({ player, startTile, tileEngine })
 
     const enemies = []
-    resetEnemies(level, tileEngine, startTile, finishTile, enemies)
+    resetEnemies({ enemies, finishTile, level, startTile, tileEngine })
 
     const resizeCanvas = makeResizeCanvas(canvas)
 
@@ -330,12 +305,8 @@ function main () {
               startTile = calcStartTile({ tileEngine })
               finishTile = calcFinishTile({ tileEngine })
 
-              resetPlayer({
-                player,
-                startTile,
-                tileEngine
-              })
-              resetEnemies(level, tileEngine, startTile, finishTile, enemies)
+              resetPlayer({ player, startTile, tileEngine })
+              resetEnemies({ level, tileEngine, startTile, finishTile, enemies })
 
               playSound('start')
 

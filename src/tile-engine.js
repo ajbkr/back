@@ -3,8 +3,10 @@ import { TileEngine } from 'kontra'
 
 import { collisions } from './collisions'
 import {
+  FINISH_TILE,
   MAP_HEIGHT,
   MAP_WIDTH,
+  START_TILE,
   TILE_HEIGHT,
   TILE_SHEET_HEIGHT,
   TILE_SHEET_WIDTH,
@@ -14,6 +16,32 @@ import { grounds } from './grounds'
 import { c, palette } from './palette'
 import { makeTileSprite } from './tile'
 import { tiles } from './tiles'
+
+function calcFinishTile ({ tileEngine }) {
+  for (let y = 0; y < MAP_HEIGHT; ++y) {
+    for (let x = 0; x < MAP_WIDTH; ++x) {
+      if (tileEngine.tileAtLayer('ground', {
+        x: x * TILE_WIDTH,
+        y: y * TILE_HEIGHT
+      }) === FINISH_TILE + 1) {
+        return { x, y }
+      }
+    }
+  }
+}
+
+function calcStartTile ({ tileEngine }) {
+  for (let y = 0; y < MAP_HEIGHT; ++y) {
+    for (let x = 0; x < MAP_WIDTH; ++x) {
+      if (tileEngine.tileAtLayer('ground', {
+        x: x * TILE_WIDTH,
+        y: y * TILE_HEIGHT
+      }) === START_TILE + 1) {
+        return { x, y }
+      }
+    }
+  }
+}
 
 function initTileEngine (cb) {
   const canvas = document.createElement('canvas')
@@ -87,5 +115,7 @@ function initTileEngine (cb) {
 }
 
 export {
+  calcFinishTile,
+  calcStartTile,
   initTileEngine
 }

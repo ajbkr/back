@@ -1,4 +1,4 @@
-const VERSION = '0.0.2'
+const VERSION = '0.0.2 (WORK-IN-PROGRESS)'
 
 const SCREEN_WIDTH = 640
 const SCREEN_HEIGHT = 480
