@@ -6,6 +6,7 @@ import {
   TileEngine
 } from 'kontra'
 
+import { makeCoinSprite } from './coin'
 import { collisions } from './collisions'
 import {
   FINISH_TILE,
@@ -47,9 +48,37 @@ const loseCondition = ({ enemies, player }) => !!enemies.filter(enemy =>
   Math.abs(enemy.y - player.y) < player.height
 ).length
 
-const winCondition = ({ finishTile, player }) =>
+const winCondition = ({ coins, finishTile, player }) =>
   Math.floor((player.x + player.width / 2) / TILE_WIDTH) === finishTile.x &&
-  Math.floor((player.y + player.height / 2) / TILE_HEIGHT) === finishTile.y
+  Math.floor((player.y + player.height / 2) / TILE_HEIGHT) === finishTile.y &&
+  coins.length === 0
+
+function resetCoins ({ coins, finishTile, level, startTile, tileEngine }) {
+  coins.length = 0
+
+  const numberOfCoins = 1 + Math.floor(level * (level / 13))
+
+  for (let index = 0; index < numberOfCoins; ++index) {
+    const coin = makeCoinSprite(context, tileEngine)
+
+    let x, y
+
+    do {
+      x = Math.floor(Math.random() * MAP_WIDTH) * TILE_WIDTH + TILE_WIDTH / 8
+      y = Math.floor(Math.random() * MAP_HEIGHT) * TILE_HEIGHT
+    } while ((tileEngine.tileAtLayer('collision', { x, y }) ||
+      Math.floor(x / TILE_WIDTH) === startTile.x) ||
+      (tileEngine.tileAtLayer('collision', { x, y }) ||
+      Math.floor(x / TILE_WIDTH) === finishTile.x) ||
+      tileEngine.tileAtLayer('ground', { x, y }) === START_TILE + 1 ||
+      tileEngine.tileAtLayer('ground', { x, y }) === FINISH_TILE + 1)
+
+    coin.x = x
+    coin.y = y
+
+    coins.push(coin)
+  }
+}
 
 function resetEnemies ({ enemies, finishTile, level, startTile, tileEngine }) {
   enemies.length = 0
@@ -125,6 +154,7 @@ function main () {
   let state
 
   let level = 0
+  let totalCoins = 0
 
   initTileEngine((tileEngine, image) => {
     const font = makeFontSprite()
@@ -139,6 +169,9 @@ function main () {
 
     const enemies = []
     resetEnemies({ enemies, finishTile, level, startTile, tileEngine })
+
+    let coins = []
+    resetCoins({ coins, finishTile, level, startTile, tileEngine })
 
     const resizeCanvas = makeResizeCanvas(canvas)
 
@@ -175,6 +208,8 @@ function main () {
 
             // pal.render()
 
+            coins.forEach(coin => coin.render())
+
             player.render()
 
             enemies.forEach(enemy => enemy.render())
@@ -185,12 +220,16 @@ function main () {
             font.y = 6
             font.outputText('BACK TO THE ISLAND')
 
-            font.y = 12
-            font.outputText('LEVEL ' + (level + 1))
+            font.y = 18
+            font.outputText('LEVEL: ' + (level + 1))
 
             font.x = SCREEN_WIDTH - VERSION.length * 4 - 4
             font.y = 6
             font.outputText(VERSION)
+
+            font.x = 4
+            font.y = 24
+            font.outputText('SCORE: ' + totalCoins)
 
             // debug.render()
 
@@ -227,13 +266,27 @@ function main () {
             break
           }
           case 'play': {
-            if (winCondition({ finishTile, player })) {
+            if (winCondition({ coins, finishTile, player })) {
               playSound('win')
               state = 'win'
             } else if (loseCondition({ enemies, player })) {
               playSound('lose')
               state = 'lose'
             }
+
+            const newCoins = []
+            for (let index = 0; index < coins.length; ++index) {
+              const coin = coins[index]
+
+              if (!(Math.abs(coin.x - player.x) < player.width &&
+                Math.abs(coin.y - player.y) < player.height)) {
+                newCoins.push(coin)
+              } else {
+                ++totalCoins
+                playSound('collect')
+              }
+            }
+            coins = newCoins
 
             for (let index = 0; index < enemies.length; ++index) {
               const enemy = enemies[index]
@@ -306,6 +359,7 @@ function main () {
               finishTile = calcFinishTile({ tileEngine })
 
               resetPlayer({ player, startTile, tileEngine })
+              resetCoins({ coins, finishTile, level, startTile, tileEngine })
               resetEnemies({ level, tileEngine, startTile, finishTile, enemies })
 
               playSound('start')
