@@ -1,3 +1,4 @@
+import commonjs from 'rollup-plugin-commonjs'
 import htmlBundle from 'rollup-plugin-html-bundle'
 import livereload from 'rollup-plugin-livereload'
 import nodeResolve from 'rollup-plugin-node-resolve'
@@ -34,6 +35,7 @@ export default {
   },
   plugins: [
     nodeResolve(),
+    commonjs(),
     production && terser(),
     htmlBundle({
       inline: true

@@ -26,6 +26,7 @@ import { grounds } from './grounds'
 // import { c, makePaletteSprite, palette } from './palette'
 import { c, palette } from './palette'
 import { makePlayerSprite } from './player'
+import { random } from './random'
 import { makeResizeCanvas } from './resize'
 import { playSound } from './sound'
 import {
@@ -65,8 +66,8 @@ function resetCoins ({ coins, finishTile, level, startTile, tileEngine }) {
     let x, y
 
     do {
-      x = Math.floor(Math.random() * MAP_WIDTH) * TILE_WIDTH + TILE_WIDTH / 8
-      y = Math.floor(Math.random() * MAP_HEIGHT) * TILE_HEIGHT
+      x = Math.floor(random() * MAP_WIDTH) * TILE_WIDTH + TILE_WIDTH / 8
+      y = Math.floor(random() * MAP_HEIGHT) * TILE_HEIGHT
     } while ((tileEngine.tileAtLayer('collision', { x, y }) ||
       Math.floor(x / TILE_WIDTH) === startTile.x) ||
       (tileEngine.tileAtLayer('collision', { x, y }) ||
@@ -94,8 +95,8 @@ function resetEnemies ({ enemies, finishTile, level, startTile, tileEngine }) {
     let x, y
 
     do {
-      x = Math.floor(Math.random() * MAP_WIDTH) * TILE_WIDTH + TILE_WIDTH / 8
-      y = Math.floor(Math.random() * MAP_HEIGHT) * TILE_HEIGHT
+      x = Math.floor(random() * MAP_WIDTH) * TILE_WIDTH + TILE_WIDTH / 8
+      y = Math.floor(random() * MAP_HEIGHT) * TILE_HEIGHT
     } while ((tileEngine.tileAtLayer('collision', { x, y }) ||
       Math.floor(x / TILE_WIDTH) === startTile.x) ||
       (tileEngine.tileAtLayer('collision', { x, y }) ||
@@ -106,7 +107,7 @@ function resetEnemies ({ enemies, finishTile, level, startTile, tileEngine }) {
     enemy.x = x
     enemy.y = y
 
-    enemy.dy = Math.random() < 0.5 ? -0.5 : 0.5
+    enemy.dy = random() < 0.5 ? -0.5 : 0.5
     enemy.dy *= ((level + 1) / 3)
 
     enemies.push(enemy)
