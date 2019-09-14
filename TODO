@@ -16,6 +16,7 @@ Could
 
 Randomly-generate islands at runtime
 Add unit tests
+Persist high score (personal best)
 
 Won't
 -----
