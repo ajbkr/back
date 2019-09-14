@@ -5,14 +5,16 @@ js13kGames 2019 entry, theme: "back".
 
 An H. P. Lovecraft-inspired game written in JavaScript.
 
-Live Demo
----------
+Competition entry: [http://js13kgames.com/entries/back-to-the-island](http://js13kgames.com/entries/back-to-the-island)
+
+Post-Compo Demo
+---------------
 
 "I had no intention, none whatsoever, of going back... BACK TO THE ISLAND."
 
 [Play now!](https://ajbkr.github.io/back/)
 
-Arrow keys to move on desktop; virtual joystick to move on mobile/tablet.
+Arrow keys, WASD, or ZQSD to move on desktop; virtual joystick to move on mobile/tablet.
 
 Dependencies
 ------------
@@ -27,6 +29,8 @@ Back to the Island makes use of the following libraries/tools:
 
 Screenshots
 -----------
+
+### 0.0.1
 
 ![VGA 640x480, 16-color palette](screenshots/000.png "VGA 640x480, 16-color palette")
 ![Tile engine with palette overlay](screenshots/001.png "Tile engine with palette overlay")
@@ -50,3 +54,7 @@ Screenshots
 ![Enemy movement and start/finish tiles](screenshots/019.png "Enemy movement and start/finish tiles")
 ![Adding levels](screenshots/020.png "Adding levels")
 ![Moar levels](screenshots/021.png "Moar levels")
+
+### 0.0.2
+
+...
