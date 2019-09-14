@@ -58,7 +58,10 @@ const winCondition = ({ coins, finishTile, player }) =>
 function resetCoins ({ coins, finishTile, level, startTile, tileEngine }) {
   coins.length = 0
 
-  const numberOfCoins = 1 + Math.floor(level * (level / 13))
+  let numberOfCoins = 1 + Math.floor(level * (level / 13))
+  if (numberOfCoins > 5) {
+    numberOfCoins = 5
+  }
 
   for (let index = 0; index < numberOfCoins; ++index) {
     const coin = makeCoinSprite(context, tileEngine)
