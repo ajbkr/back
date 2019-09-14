@@ -14,8 +14,8 @@ Work continues on Back to the Island post-competition.
 
 "I had no intention, none whatsoever, of going back... BACK TO THE ISLAND."
 
-Avoid the critters roaming the grasslands and make your way to the chequered
-flag to advance to the next island. Rinse and repeat.
+Avoid the critters roaming the grasslands, collect coins, and make your way to
+the chequered flag to advance to the next island. Rinse and repeat.
 
 Arrow keys, WASD, or ZQSD to move on desktop; virtual joystick to move on
 mobile/tablet.
@@ -38,6 +38,7 @@ Screenshots
 
 ### 0.0.2
 
+![Add coins](screenshots/023.png "Add coins")
 ![Display the version](screenshots/022.png "Display the version")
 
 ### 0.0.1

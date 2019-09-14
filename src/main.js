@@ -50,8 +50,9 @@ const loseCondition = ({ enemies, player }) => !!enemies.filter(enemy =>
 
 const winCondition = ({ coins, finishTile, player }) =>
   Math.floor((player.x + player.width / 2) / TILE_WIDTH) === finishTile.x &&
-  Math.floor((player.y + player.height / 2) / TILE_HEIGHT) === finishTile.y &&
-  coins.length === 0
+  // Math.floor((player.y + player.height / 2) / TILE_HEIGHT) === finishTile.y &&
+  // coins.length === 0
+  Math.floor((player.y + player.height / 2) / TILE_HEIGHT) === finishTile.y
 
 function resetCoins ({ coins, finishTile, level, startTile, tileEngine }) {
   coins.length = 0
