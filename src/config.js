@@ -1,3 +1,5 @@
+const VERSION = '0.0.2'
+
 const SCREEN_WIDTH = 640
 const SCREEN_HEIGHT = 480
 
@@ -23,5 +25,6 @@ export {
   TILE_HEIGHT,
   TILE_SHEET_HEIGHT,
   TILE_SHEET_WIDTH,
-  TILE_WIDTH
+  TILE_WIDTH,
+  VERSION
 }
