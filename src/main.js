@@ -19,7 +19,6 @@ import {
   TILE_WIDTH,
   VERSION
 } from './config'
-import { makeDebugSprite } from './debug'
 import { makeEnemySprite } from './enemy'
 import { makeFontSprite } from './font'
 import { grounds } from './grounds'
@@ -54,6 +53,17 @@ const winCondition = ({ coins, finishTile, player }) =>
   // Math.floor((player.y + player.height / 2) / TILE_HEIGHT) === finishTile.y &&
   // coins.length === 0
   Math.floor((player.y + player.height / 2) / TILE_HEIGHT) === finishTile.y
+
+function collectCoins ({ coins, player, totalCoins }) {
+  const uncollectedCoins = coins.filter(coin =>
+    !(Math.abs(coin.x - player.x) < player.width &&
+    Math.abs(coin.y - player.y) < player.height))
+
+  return {
+    collected: uncollectedCoins.length < coins.length,
+    uncollectedCoins
+  }
+}
 
 function resetCoins ({ coins, finishTile, level, startTile, tileEngine }) {
   coins.length = 0
@@ -164,8 +174,6 @@ function main () {
   initTileEngine((tileEngine, image) => {
     const font = makeFontSprite()
 
-    const debug = makeDebugSprite(context)
-
     let startTile = calcStartTile({ tileEngine })
     let finishTile = calcFinishTile({ tileEngine })
 
@@ -236,8 +244,6 @@ function main () {
             font.y = 24
             font.outputText('SCORE: ' + totalCoins)
 
-            // debug.render()
-
             controller.draw()
 
             break
@@ -279,20 +285,16 @@ function main () {
               state = 'lose'
             }
 
-            const newCoins = []
-            for (let index = 0; index < coins.length; ++index) {
-              const coin = coins[index]
+            // collect coin(s)
+            const { collected, uncollectedCoins } = collectCoins({ coins, player, totalCoins })
 
-              if (!(Math.abs(coin.x - player.x) < player.width &&
-                Math.abs(coin.y - player.y) < player.height)) {
-                newCoins.push(coin)
-              } else {
-                ++totalCoins
-                playSound('collect')
-              }
+            if (collected) {
+              coins = uncollectedCoins
+              ++totalCoins
+              playSound('collect')
             }
-            coins = newCoins
 
+            // check for collision with enemies
             for (let index = 0; index < enemies.length; ++index) {
               const enemy = enemies[index]
 
@@ -339,10 +341,6 @@ function main () {
             } else if (dy > 0) {
               player.moveSouth()
             }
-
-            debug.text = '(' + player.x + ', ' + player.y + ') (' +
-              tileEngine.sx + ', ' + tileEngine.sy + ') (' +
-              (player.x - tileEngine.sx) + ', ' + (player.y - tileEngine.sy) + ')'
 
             break
           }

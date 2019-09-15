@@ -1,15 +1,13 @@
 import { Sprite } from 'kontra'
 
-import {
-  TILE_HEIGHT,
-  TILE_WIDTH
-} from './config'
 import { c, palette } from './palette'
 
 function makeEnemySprite (context, tileEngine) {
+  const { tileheight, tilewidth } = tileEngine
+
   return Sprite({
-    width: TILE_WIDTH / 4 * 3,
-    height: TILE_HEIGHT / 4 * 3,
+    width: tilewidth / 4 * 3,
+    height: tileheight / 4 * 3,
 
     x: 0,
     y: 0,

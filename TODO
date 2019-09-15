@@ -10,6 +10,7 @@ Remove camera/panning code (sx/sy)
 Ensure all coins are collectable
 Ensure palette colours and their corresponding names are correct
 Only one coin per tile
+Re-use TileEngine instance (also, remove redundant this.tileEngine from makePlayerSprite())
 
 Could
 -----
