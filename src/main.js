@@ -7,7 +7,6 @@ import {
 } from 'kontra'
 
 import { makeCoinSprite } from './coin'
-import { collisions } from './collisions'
 import {
   FINISH_TILE,
   MAP_HEIGHT,
@@ -21,7 +20,7 @@ import {
 } from './config'
 import { makeEnemySprite } from './enemy'
 import { makeFontSprite } from './font'
-import { grounds } from './grounds'
+import { levels } from './levels'
 // import { c, makePaletteSprite, palette } from './palette'
 import { c, palette } from './palette'
 import { makePlayerSprite } from './player'
@@ -98,7 +97,7 @@ function resetCoins ({ coins, finishTile, level, startTile, tileEngine }) {
 function resetEnemies ({ enemies, finishTile, level, startTile, tileEngine }) {
   enemies.length = 0
 
-  const numberOfEnemies = Math.floor(collisions[level % collisions.length]
+  const numberOfEnemies = Math.floor(levels[level % levels.length].collision
     .map(tile => [1, 0][tile])
     .reduce((sum, tile) => sum + tile) / 13)
 
@@ -151,7 +150,7 @@ function resetTileEngine ({ image, level, tileEngine }) {
     }],
 
     layers: [{
-      data: grounds[level % grounds.length]
+      data: levels[level % levels.length].ground
         .map(tile => !startTile && tile === 62 ? (startTile = 64) : tile)
         .reverse()
         .map(tile => !finishTile && tile === 62 ? (finishTile = 65) : tile)
@@ -159,7 +158,7 @@ function resetTileEngine ({ image, level, tileEngine }) {
         .map(tile => tile + 1),
       name: 'ground'
     }, {
-      data: collisions[level % collisions.length],
+      data: levels[level % levels.length].collision,
       name: 'collision'
     }]
   })

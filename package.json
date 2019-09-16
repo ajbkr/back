@@ -8,9 +8,7 @@
     "build": "rollup -c",
     "dev": "rollup -c -w",
     "postinstall": "napa KilledByAPixel/ZzFX#v1.05:zzfx",
-    "lint": "standard make-collision.js make-ground.js rollup.config.js 'src/**/*.js'",
-    "make-collision": "node make-collision.js > src/collision.js",
-    "make-ground": "node make-ground.js > src/ground.js",
+    "lint": "standard make-collison.js make-ground.js rollup.config.js rollup-plugin-make-levels.js 'src/**/*.js'",
     "test": "echo \"Error: no test specified\" && exit 1",
     "zip": "cd dist && zip ../back.zip index.html && advzip -z4 -i50 ../back.zip"
   },

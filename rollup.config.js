@@ -5,6 +5,8 @@ import nodeResolve from 'rollup-plugin-node-resolve'
 import serve from 'rollup-plugin-serve'
 import { terser } from 'rollup-plugin-terser'
 
+import { makeLevels } from './rollup-plugin-make-levels'
+
 const fs = require('fs')
 const path = require('path')
 
@@ -34,6 +36,7 @@ export default {
     }
   },
   plugins: [
+    makeLevels(),
     nodeResolve(),
     commonjs(),
     production && terser(),
@@ -44,6 +47,9 @@ export default {
     !production && livereload()
   ],
   watch: {
-    exclude: ['node_modules/**']
+    exclude: [
+      'node_modules/**',
+      'src/levels.js'
+    ]
   }
 }

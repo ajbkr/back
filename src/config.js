@@ -12,12 +12,18 @@ const MAP_HEIGHT = SCREEN_HEIGHT / TILE_HEIGHT
 const TILE_SHEET_WIDTH = 8
 const TILE_SHEET_HEIGHT = 9
 
+const BASE_TILE = 16
+
 const START_TILE = 64
 const FINISH_TILE = 65
 
 const SEED = 12
 
+const DENSITY = 0.4
+
 export {
+  BASE_TILE,
+  DENSITY,
   FINISH_TILE,
   MAP_HEIGHT,
   MAP_WIDTH,
