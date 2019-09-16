@@ -25,39 +25,40 @@ function makeTileSprite (options) {
 
   const context2 = canvas2.getContext('2d')
 
-  return Sprite({
-    width: TILE_WIDTH,
-    height: TILE_HEIGHT,
+  return Object.assign(
+    Sprite({
+      width: TILE_WIDTH,
+      height: TILE_HEIGHT,
 
-    x: 0,
-    y: 0,
+      x: 0,
+      y: 0,
 
-    bkcolor: palette[c.black],
+      bkcolor: palette[c.black],
 
-    circles: [],
+      circles: [],
 
-    render () {
-      const { bkcolor, context, height, width } = this
+      render () {
+        const { bkcolor, context, height, width } = this
 
-      context2.fillStyle = bkcolor
-      context2.fillRect(0, 0, width, height)
+        context2.fillStyle = bkcolor
+        context2.fillRect(0, 0, width, height)
 
-      const offset = width / N / 2
+        const offset = width / N / 2
 
-      this.circles.forEach(circle => {
-        const radius = offset * radiuses[circle.radius]
+        this.circles.forEach(circle => {
+          const radius = offset * radiuses[circle.radius]
 
-        const cx = (circle.x + N / 2) * (width / N)
-        const cy = (circle.y + N / 2) * (height / N)
+          const cx = (circle.x + N / 2) * (width / N)
+          const cy = (circle.y + N / 2) * (height / N)
 
-        fillCircle(context2, offset + cx, offset + cy, radius, circle.color)
-      })
+          fillCircle(context2, offset + cx, offset + cy, radius, circle.color)
+        })
 
-      context.drawImage(canvas2, this.x, this.y)
-    },
-
-    ...options
-  })
+        context.drawImage(canvas2, this.x, this.y)
+      }
+    }),
+    options
+  )
 }
 
 export {
