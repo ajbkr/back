@@ -38,7 +38,7 @@ Screenshots
 
 ### 0.0.2
 
-![Add more islands (rollup-plugin-make-levels)](screenshots/024.png "Add more islands (rollup-plugin-make-levels)
+![Add more islands (rollup-plugin-make-levels)](screenshots/024.png "Add more islands (rollup-plugin-make-levels))
 ![Add coins](screenshots/023.png "Add coins")
 ![Display the version](screenshots/022.png "Display the version")
 
