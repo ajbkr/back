@@ -101,7 +101,8 @@ const makeLevels = () => ({
     const seeds = [
       0, 1, 2, 3, 5,
       6, 8, 9, 10, 11,
-      12, 13, 14, 15, 16
+      12, 13, 14, 15, 16,
+      17, 19, 21, 22, 24
     ]
 
     const collisions = seeds.map(seed => makeCollision({ seed }))

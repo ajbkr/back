@@ -1452,8 +1452,22 @@ const tiles = [
       }
     ]
   },
-  { // autotile 43
-    bkcolor: palette[c['bright-red']]
+  { // autotile 43: wet sand, dots top-left and top-right
+    bkcolor: palette[c['bright-yellow']],
+    circles: [
+      {
+        x: -4,
+        y: -4,
+        radius: 2,
+        color: palette[c.brown]
+      },
+      {
+        x: 3,
+        y: -4,
+        radius: 2,
+        color: palette[c.brown]
+      }
+    ]
   },
   { // autotile 44: wet sand, top-right
     bkcolor: palette[c['bright-yellow']],
