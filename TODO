@@ -10,16 +10,22 @@ Ensure all coins are collectable
 Ensure palette colours and their corresponding names are correct
 Only one coin per tile
 Re-use TileEngine instance (also, remove redundant this.tileEngine from makePlayerSprite())
+Rename playSound() to playSoundUnique() (or similar) and add playSound() without
+  delay (for multi-coin collection)
 
 Could
 -----
 
-Randomly-generate islands at runtime
+Allow for the use of gamepads
+Add bridges if start and finish tiles are not reachable
 Add unit tests
 Persist high score (personal best)
 Use Kontra's Pool
+Force the player to have amassed a certain number of coins before they are able
+  to advance to the next island; if you don't have enough coins... you have to
+  go back to a previous island!
 
 Won't
 -----
 
-...
+Randomly-generate islands at runtime
