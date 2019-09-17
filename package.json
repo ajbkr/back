@@ -7,7 +7,7 @@
   "scripts": {
     "build": "rollup -c",
     "dev": "rollup -c -w",
-    "postinstall": "napa KilledByAPixel/ZzFX#v1.05:zzfx",
+    "postinstall": "mkdirp dist && napa KilledByAPixel/ZzFX#v1.05:zzfx",
     "lint": "standard rollup.config.js 'rollup-plugin-make-levels/**/*.js' 'src/**/*.js'",
     "test": "echo \"Error: no test specified\" && exit 1",
     "zip": "cd dist && zip ../back.zip index.html && advzip -z4 -i50 ../back.zip"
@@ -21,24 +21,25 @@
   "license": "ISC",
   "dependencies": {
     "fast-random": "^2.0.4",
-    "kontra": "6.3.0",
+    "kontra": "^6.6.0",
     "virtual-stick": "^1.0.6"
   },
   "devDependencies": {
     "autotile": "^1.1.0",
     "cave-automata-2d": "^0.3.1",
     "husky": "^3.0.5",
+    "mkdirp": "^0.5.1",
     "napa": "^3.0.0",
     "ndarray": "^1.0.18",
     "ndarray-fill": "^1.0.2",
-    "rollup": "^1.21.2",
+    "rollup": "^1.21.4",
     "rollup-plugin-commonjs": "^10.1.0",
     "rollup-plugin-html-bundle": "0.0.3",
     "rollup-plugin-livereload": "^1.0.1",
     "rollup-plugin-node-resolve": "^5.2.0",
     "rollup-plugin-serve": "^1.0.1",
     "rollup-plugin-terser": "^5.1.2",
-    "standard": "^14.2.0"
+    "standard": "^14.3.0"
   },
   "husky": {
     "hooks": {

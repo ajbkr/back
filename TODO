@@ -1,7 +1,7 @@
 Must
 ----
 
-Update Kontra to >= 6.4.0
+...
 
 Should
 ------
@@ -10,8 +10,6 @@ Ensure all coins are collectable
 Ensure palette colours and their corresponding names are correct
 Only one coin per tile
 Re-use TileEngine instance (also, remove redundant this.tileEngine from makePlayerSprite())
-Rename playSound() to playSoundUnique() (or similar) and add playSound() without
-  delay (for multi-coin collection)
 
 Could
 -----
