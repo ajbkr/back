@@ -4,7 +4,7 @@ import {
   BASE_TILE,
   MAP_HEIGHT,
   MAP_WIDTH
-} from './src/config'
+} from '../src/config'
 
 function makeGround ({ collisionData }) {
   const data = []

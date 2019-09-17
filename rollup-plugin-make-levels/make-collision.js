@@ -6,8 +6,8 @@ import {
   DENSITY as density,
   MAP_HEIGHT,
   MAP_WIDTH
-} from './src/config'
-import { random, setSeed } from './src/random'
+} from '../src/config'
+import { random, setSeed } from '../src/random'
 
 function makeCollision ({ seed }) {
   setSeed(seed)

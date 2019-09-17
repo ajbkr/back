@@ -5,7 +5,7 @@ import nodeResolve from 'rollup-plugin-node-resolve'
 import serve from 'rollup-plugin-serve'
 import { terser } from 'rollup-plugin-terser'
 
-import { makeLevels } from './rollup-plugin-make-levels'
+import { makeLevels } from './rollup-plugin-make-levels/index'
 
 const fs = require('fs')
 const path = require('path')

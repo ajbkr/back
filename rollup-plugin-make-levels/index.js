@@ -1,7 +1,7 @@
 import {
   MAP_HEIGHT,
   MAP_WIDTH
-} from './src/config'
+} from '../src/config'
 import { makeCollision } from './make-collision'
 import { makeGround } from './make-ground'
 
