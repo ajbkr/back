@@ -1,7 +1,7 @@
 import { Sprite } from 'kontra'
 
 import { c, palette } from './palette'
-import { playSound } from './sound'
+import { playSoundUnique } from './sound'
 
 function makePlayerSprite (context, tileEngine) {
   const { tileheight, tilewidth } = tileEngine
@@ -51,7 +51,7 @@ function makePlayerSprite (context, tileEngine) {
       })) {
         this.x = x
       } else {
-        playSound('sea')
+        playSoundUnique('sea')
       }
     },
 
@@ -71,7 +71,7 @@ function makePlayerSprite (context, tileEngine) {
       })) {
         this.y = y
       } else {
-        playSound('sea')
+        playSoundUnique('sea')
       }
     },
 
@@ -93,7 +93,7 @@ function makePlayerSprite (context, tileEngine) {
       })) {
         this.y = y
       } else {
-        playSound('sea')
+        playSoundUnique('sea')
       }
     },
 
@@ -115,7 +115,7 @@ function makePlayerSprite (context, tileEngine) {
       })) {
         this.x = x
       } else {
-        playSound('sea')
+        playSoundUnique('sea')
       }
     }
   })

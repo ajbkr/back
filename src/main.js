@@ -26,7 +26,7 @@ import { c, palette } from './palette'
 import { makePlayerSprite } from './player'
 import { random } from './random'
 import { makeResizeCanvas } from './resize'
-import { playSound } from './sound'
+import { playSound, playSoundUnique } from './sound'
 import {
   calcFinishTile,
   calcStartTile,
@@ -196,7 +196,7 @@ function main () {
       container: document.getElementById('container')
     })
 
-    playSound('start')
+    playSoundUnique('start')
 
     state = 'play'
 
@@ -268,7 +268,7 @@ function main () {
                 tileEngine
               })
 
-              playSound('start')
+              playSoundUnique('start')
 
               state = 'play'
             }
@@ -277,10 +277,10 @@ function main () {
           }
           case 'play': {
             if (winCondition({ coins, finishTile, player })) {
-              playSound('win')
+              playSoundUnique('win')
               state = 'win'
             } else if (loseCondition({ enemies, player })) {
-              playSound('lose')
+              playSoundUnique('lose')
               state = 'lose'
             }
 
@@ -364,7 +364,7 @@ function main () {
               resetCoins({ coins, finishTile, level, startTile, tileEngine })
               resetEnemies({ level, tileEngine, startTile, finishTile, enemies })
 
-              playSound('start')
+              playSoundUnique('start')
 
               state = 'play'
             }

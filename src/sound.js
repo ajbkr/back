@@ -15,7 +15,9 @@ const sounds = {
   win: [1, 0.1, 652, 1.1, 0.94, 0, 3.5, 4.5, 0.15] // ZzFX 62086
 }
 
-function playSound (name) {
+const playSound = name => zzfx.apply(null, sounds[name])
+
+function playSoundUnique (name) {
   if (!intervalIDs[name]) {
     zzfx.apply(null, sounds[name])
 
@@ -27,5 +29,6 @@ function playSound (name) {
 }
 
 export {
-  playSound
+  playSound,
+  playSoundUnique
 }
