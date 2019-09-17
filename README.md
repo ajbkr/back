@@ -3,7 +3,7 @@ Back to the Island
 
 js13kGames 2019 entry, theme: "back".
 
-An H. P. Lovecraft-inspired game written in JavaScript.
+An H. P. Lovecraft-inspired (?) game written in JavaScript.
 
 Competition entry: [http://js13kgames.com/entries/back-to-the-island](http://js13kgames.com/entries/back-to-the-island)
 
@@ -17,8 +17,8 @@ Work continues on Back to the Island post-competition.
 Avoid the critters roaming the grasslands, collect coins, and make your way to
 the chequered flag to advance to the next island. Rinse and repeat.
 
-Arrow keys, WASD, or ZQSD to move on desktop; virtual joystick to move on
-mobile/tablet.
+Arrow keys, WASD/ZQSD, or a gamepad's left stick to move on desktop; virtual
+joystick to move on mobile/tablet.
 
 [Play now!](https://ajbkr.github.io/back/)
 

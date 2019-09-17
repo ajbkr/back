@@ -33,6 +33,10 @@ import {
   initTileEngine
 } from './tile-engine'
 
+import 'joypad.js'
+
+const joypadAxis = { dx: 0, dy: 0 }
+
 const VirtualStick = exports.VirtualStick // XXX
 
 const { canvas, context } = init()
@@ -196,6 +200,39 @@ function main () {
       container: document.getElementById('container')
     })
 
+    window.joypad.set({ axisMovementThreshold: 0.3 })
+
+    window.joypad.on('connect', e => {
+      const { id } = e.gamepad
+
+      console.log(`${id} connected!`)
+    })
+
+    window.joypad.on('axis_move', ({ detail }) => {
+      const { directionOfMovement, stickMoved } = detail
+
+      let { dx, dy } = joypadAxis
+
+      if (stickMoved === 'left_stick') {
+        switch (directionOfMovement) {
+          case 'left':
+            dx = -1
+            break
+          case 'right':
+            dx = 1
+            break
+          case 'top':
+            dy = -1
+            break
+          case 'bottom':
+            dy = 1
+        }
+
+        joypadAxis.dx = dx
+        joypadAxis.dy = dy
+      }
+    })
+
     playSoundUnique('start')
 
     state = 'play'
@@ -328,17 +365,38 @@ function main () {
               player.moveSouth()
             }
 
-            const { dx, dy } = controller.getAxis()
+            {
+              const { dx, dy } = controller.getAxis()
 
-            if (dx < 0) {
-              player.moveWest()
-            } else if (dx > 0) {
-              player.moveEast()
+              if (dx < 0) {
+                player.moveWest()
+              } else if (dx > 0) {
+                player.moveEast()
+              }
+              if (dy < 0) {
+                player.moveNorth()
+              } else if (dy > 0) {
+                player.moveSouth()
+              }
             }
-            if (dy < 0) {
-              player.moveNorth()
-            } else if (dy > 0) {
-              player.moveSouth()
+
+            {
+              const { dx, dy } = joypadAxis
+
+              if (dx < 0) {
+                player.moveWest()
+                joypadAxis.dx = 0
+              } else if (dx > 0) {
+                player.moveEast()
+                joypadAxis.dx = 0
+              }
+              if (dy < 0) {
+                player.moveNorth()
+                joypadAxis.dy = 0
+              } else if (dy > 0) {
+                player.moveSouth()
+                joypadAxis.dy = 0
+              }
             }
 
             break

@@ -21,6 +21,7 @@
   "license": "ISC",
   "dependencies": {
     "fast-random": "^2.0.4",
+    "joypad.js": "^1.2.9",
     "kontra": "^6.6.0",
     "virtual-stick": "^1.0.6"
   },

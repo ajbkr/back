@@ -14,7 +14,6 @@ Re-use TileEngine instance (also, remove redundant this.tileEngine from makePlay
 Could
 -----
 
-Allow for the use of gamepads
 Add bridges if start and finish tiles are not reachable
 Add unit tests
 Persist high score (personal best)
