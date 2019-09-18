@@ -20,6 +20,9 @@ export default {
   input: 'src/main.js',
   output: {
     banner:
+      'if (!window.AudioContext && window.webkitAudioContext) {' +
+      '  window.AudioContext = window.webkitAudioContext' +
+      '}' +
       'exports={};' + fs.readFileSync(path.join(
         __dirname,
         'node_modules/virtual-stick/dist/bundle.js'
