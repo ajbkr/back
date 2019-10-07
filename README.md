@@ -7,6 +7,8 @@ An H. P. Lovecraft-inspired (?) game written in JavaScript.
 
 Competition entry: [http://js13kgames.com/entries/back-to-the-island](http://js13kgames.com/entries/back-to-the-island)
 
+Placed 161st overall!
+
 Post-Compo Demo
 ---------------
 
@@ -66,3 +68,41 @@ Screenshots
 ![Basic player movement](screenshots/002.png "Basic player movement")
 ![Tile engine with palette overlay](screenshots/001.png "Tile engine with palette overlay")
 ![VGA 640x480, 16-color palette](screenshots/000.png "VGA 640x480, 16-color palette")
+
+Link Dump (Ideas)
+-----------------
+
+* https://en.wikipedia.org/wiki/Machair
+* https://en.wikipedia.org/wiki/Grassland
+* https://en.wikipedia.org/wiki/Ammophila_(plant)
+* https://en.wikipedia.org/wiki/Kelp
+* https://en.wikipedia.org/wiki/Spiranthes
+* https://en.wikipedia.org/wiki/Rhinanthus_minor
+* https://en.wikipedia.org/wiki/Hebridean_mythology_and_folklore
+* https://en.wikipedia.org/wiki/Pictish_language
+* https://en.wikipedia.org/wiki/Fairy_Flag
+* https://en.wikipedia.org/wiki/Raven_banner
+* https://www.paranormaldatabase.com/islands/outedata.php
+* https://en.wikipedia.org/wiki/Ogham
+* https://en.wikipedia.org/wiki/Scottish_Gaelic_orthography
+* https://en.wikipedia.org/wiki/Deep_One
+* https://en.wikipedia.org/wiki/Dagon_(short_story)
+* https://en.wikipedia.org/wiki/Newburyport,_Massachusetts
+* https://en.wikipedia.org/wiki/Esoteric_Order_of_Dagon
+* https://www.independent.co.uk/news/science/a-rare-view-of-britains-largest-underwater-mountain-9645996.html
+* https://www.visitouterhebrides.co.uk/see-and-do/dun-carloway-broch-dun-charlabhaigh-p524091
+* https://www.scotsman.com/heritage/mysterious-man-made-islands-on-scotland-s-lochs-thousands-of-years-older-than-first-thought-1-4947542
+* https://en.wikipedia.org/wiki/Dagon
+* https://en.wikipedia.org/wiki/List_of_English_words_of_Old_Norse_origin
+* https://www.etymonline.com/word/ridge
+* https://cfz-usa.blogspot.com/2016/06/what-was-searrach-uisge.html
+* http://www.mysteriousbritain.co.uk/cryptozoology/searrach-uisge/
+* https://answers.yahoo.com/question/index?qid=20070822032843AAma1Jh
+* https://en.wikipedia.org/wiki/Hebrides
+* https://en.wikipedia.org/wiki/Vatersay
+* https://norse-mythology.org/runes/
+* https://en.wikipedia.org/wiki/Dzi_bead
+* https://github.com/shroudedcode/contro
+* https://www.visitouterhebrides.co.uk/see-and-do/nature/wildlife/machair
+* https://www.urbanfonts.com/fonts/Fifteen_Okay.htm
+* ...

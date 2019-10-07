@@ -25,3 +25,24 @@ Won't
 -----
 
 Randomly-generate islands at runtime
+
+
+Feedback from the experts
+=========================
+Spartez Team: Great game aesthetics. I liked the graphics and how smooth it
+looks. For the game design part I was confused initially given I just started
+playing in the level, and I thought that, what I later figured out it was the
+goal of the level, was actually a trap so I couldn't touch it. Also I thought
+the levels were randomly generated until I repeated the same level plenty of
+times. There could be some improvements on how the levels are generated because
+many times I can simply end the level without any challenge, and making the
+creatures go faster maybe not the only mechanics that can make the challenge.
+You can add some variety of different monsters that can kill the player. For the
+improvements you've made for 0.0.2 is a good general direction, please continue!
+:)
+
+Björn Ritzl: This is a good start but I feel more could be done with the
+concept. There was no real sense of progression or difficulty curve. I would
+like to see increasingly large islands, more and faster enemies as you progress.
+As it is now you could end up next to the checkpoint on a small island far into
+the game. That kind of scenario should be reserved for earlier levels.
