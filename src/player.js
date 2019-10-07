@@ -13,11 +13,7 @@ function makePlayerSprite (context, tileEngine) {
     x: 0,
     y: 0,
 
-    tileEngine,
-
     render () {
-      const { tileEngine } = this
-
       context.fillStyle = palette[c.red]
       context.fillRect(this.x - tileEngine.sx, this.y - tileEngine.sy, this.width,
         this.height - 3)
@@ -36,7 +32,7 @@ function makePlayerSprite (context, tileEngine) {
     },
 
     moveEast () {
-      const { height, tileEngine, width, y } = this
+      const { height, width, y } = this
       let { x } = this
 
       if (x < tilewidth * tileEngine.width - 1 - width) {
@@ -56,7 +52,7 @@ function makePlayerSprite (context, tileEngine) {
     },
 
     moveNorth () {
-      const { height, tileEngine, width, x } = this
+      const { height, width, x } = this
       let { y } = this
 
       if (y > 0) {
@@ -76,8 +72,6 @@ function makePlayerSprite (context, tileEngine) {
     },
 
     moveSouth () {
-      const { tileEngine } = this
-
       const { height, width, x } = this
       let { y } = this
 
@@ -98,8 +92,6 @@ function makePlayerSprite (context, tileEngine) {
     },
 
     moveWest () {
-      const { tileEngine } = this
-
       const { height, width, y } = this
       let { x } = this
 

@@ -106,7 +106,7 @@ function initTileEngine (cb) {
     })
 
     if (typeof cb === 'function') {
-      cb(tileEngine, image)
+      cb(tileEngine)
     }
   }
 

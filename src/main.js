@@ -2,8 +2,7 @@ import {
   GameLoop,
   init,
   initKeys,
-  keyPressed,
-  TileEngine
+  keyPressed
 } from 'kontra'
 
 import { makeCoinSprite } from './coin'
@@ -137,35 +136,18 @@ function resetPlayer ({ player, startTile, tileEngine }) {
   player.y = TILE_HEIGHT * (startTile.y + 0.125)
 }
 
-function resetTileEngine ({ image, level, tileEngine }) {
+function resetTileEngine ({ level, tileEngine }) {
   let startTile = 0
   let finishTile = 0
 
-  return TileEngine({
-    tileheight: TILE_HEIGHT,
-    tilewidth: TILE_WIDTH,
-
-    width: MAP_WIDTH,
-    height: MAP_HEIGHT,
-
-    tilesets: [{
-      firstgid: 1,
-      image
-    }],
-
-    layers: [{
-      data: levels[level % levels.length].ground
-        .map(tile => !startTile && tile === 62 ? (startTile = 64) : tile)
-        .reverse()
-        .map(tile => !finishTile && tile === 62 ? (finishTile = 65) : tile)
-        .reverse()
-        .map(tile => tile + 1),
-      name: 'ground'
-    }, {
-      data: levels[level % levels.length].collision,
-      name: 'collision'
-    }]
-  })
+  tileEngine.setLayer('collision', levels[level % levels.length].collision)
+  tileEngine.setLayer('ground', levels[level % levels.length].ground
+    .map(tile => !startTile && tile === 62 ? (startTile = 64) : tile)
+    .reverse()
+    .map(tile => !finishTile && tile === 62 ? (finishTile = 65) : tile)
+    .reverse()
+    .map(tile => tile + 1)
+  )
 }
 
 function main () {
@@ -174,7 +156,7 @@ function main () {
   let level = 0
   let totalCoins = 0
 
-  initTileEngine((tileEngine, image) => {
+  initTileEngine(tileEngine => {
     const font = makeFontSprite()
 
     let startTile = calcStartTile({ tileEngine })
@@ -409,8 +391,7 @@ function main () {
 
               ++level
 
-              tileEngine = resetTileEngine({
-                image,
+              resetTileEngine({
                 level,
                 tileEngine
               })

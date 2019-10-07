@@ -22,25 +22,25 @@
   "dependencies": {
     "fast-random": "^2.0.4",
     "joypad.js": "^1.2.9",
-    "kontra": "^6.6.0",
+    "kontra": "ajbkr/kontra#feature/invalidate-layer-canvas",
     "virtual-stick": "^1.0.6"
   },
   "devDependencies": {
     "autotile": "^1.1.0",
     "cave-automata-2d": "^0.3.1",
-    "husky": "^3.0.5",
+    "husky": "^3.0.8",
     "mkdirp": "^0.5.1",
     "napa": "^3.0.0",
     "ndarray": "^1.0.18",
     "ndarray-fill": "^1.0.2",
-    "rollup": "^1.21.4",
+    "rollup": "^1.23.1",
     "rollup-plugin-commonjs": "^10.1.0",
     "rollup-plugin-html-bundle": "0.0.3",
-    "rollup-plugin-livereload": "^1.0.1",
+    "rollup-plugin-livereload": "^1.0.4",
     "rollup-plugin-node-resolve": "^5.2.0",
     "rollup-plugin-serve": "^1.0.1",
     "rollup-plugin-terser": "^5.1.2",
-    "standard": "^14.3.0"
+    "standard": "^14.3.1"
   },
   "husky": {
     "hooks": {
